@@ -1,2 +1,2 @@
 ### Connector Fortinet FortiManager
-Repository to maintain Fortimanger connector documentation.
+Repository to maintain Fortimanager connector documentation.
