@@ -109,7 +109,7 @@
             <td>Select the FortiManager type. You can choose from the following options:
                 <ul>
                     <li><strong>FortiManager</strong>: Specify the port number to access the Fortinet FortiManager server in the <strong>Port</strong> field. By default, this is set to 443.</li>
-                    <li><strong>FortiManager Cloud</strong>: Specify the client ID to access the Fortinet FortiManager server in the <strong>Client ID</strong> field. By default, this is set to FortiManager.</li>
+                    <li><strong>FortiManager Cloud</strong>: Specify the client ID to access the Fortinet FortiManager server in the <strong>Client ID</strong> field. By default, this is set to FortiManager. For more information, refer to <a href="https://docs.fortinet.com/document/forticloud/latest/identity-access-management-iam/19322/accessing-fortiapis">Accessing FortiAPIs</a> section in FortiCloud Documentation.</li>
                 </ul>
             </td>
         </tr>
@@ -132,6 +132,8 @@
 <h2>Actions supported by the connector</h2>
 
 <p>The following automated operations can be included in playbooks and you can also use the annotations to access operations:</p>
+
+<p>Review the section <a href="#FMG_unsupported_actions">Unsupported Actions</a> for the list of actions not supported by FortiManager Cloud.</p>
 
 <table border="1">
     <thead>
@@ -544,6 +546,25 @@
         </tr>
     </tbody>
 </table>
+
+<h2><a name="FMG_unsupported_actions" id="FMG_unsupported_actions"></a>Unsupported Actions</h2>
+
+<p>The following actions are not supported in FortiManager Cloud:</p>
+
+<ul>
+    <li>Create Incident</li>
+    <li>List Incident</li>
+    <li>Get Events Related to Incident</li>
+    <li>Get Events</li>
+    <li>Get Event Details</li>
+    <li>Update Incident</li>
+    <li>List Global Policy Package</li>
+    <li>List Global Firewall Policies</li>
+    <li>Global Level Get Blocked IP Addresses</li>
+    <li>Global Level Block IP Address</li>
+    <li>Global Level Unblock IP Address</li>
+    <li>Assign Global Policy Package</li>
+</ul>
 
 <h3>operation: Create Incident</h3>
 
