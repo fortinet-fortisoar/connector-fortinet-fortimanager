@@ -12,7 +12,7 @@
 
 <p>FortiSOAR&trade; Version Tested on: 7.6.0-5012</p>
 
-<p>Fortinet FortiManager Version Tested on: FortiManager VM64-KVM-V7.2.2 build6198</p>
+<p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.4.5 build5874 (GA)</p>
 
 <p>Authored By: Fortinet</p>
 
@@ -216,7 +216,7 @@
         </tr>
         <tr>
             <td>ADOM Level Unblock IP Address</td>
-            <td>Unlocks IP addresses at the ADOM level on Fortinet FortiGate based on the Firewall policy, address group name, and other input parameters you have specified.</td>
+            <td>Unblocks IP addresses at the ADOM level on Fortinet FortiGate based on the Firewall policy, address group name, and other input parameters you have specified.</td>
             <td>unblock_ip<br />
                 Remediation</td>
         </tr>
@@ -565,6 +565,8 @@
     <li>Global Level Unblock IP Address</li>
     <li>Assign Global Policy Package</li>
 </ul>
+
+<p><strong>NOTE</strong>: These actions are also required for the Data Ingestion functionality, hence Data Ingestion will not work with Fortinet FortiManager Cloud.</p>
 
 <h3>operation: Create Incident</h3>
 
