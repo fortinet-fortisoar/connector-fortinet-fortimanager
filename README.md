@@ -8,34 +8,26 @@
 
 <h3>Version information</h3>
 
-<p>Connector Version: 4.1.0</p>
+<p>Connector Version: 4.1.1</p>
 
 <p>FortiSOAR&trade; Version Tested on: 7.6.0-5012</p>
 
-<p>Fortinet FortiManager Version Tested on: FortiManager VM64-KVM-V7.2.2 build6198</p>
+<p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.4.5 build5874 (GA)</p>
 
 <p>Authored By: Fortinet</p>
 
 <p>Certified: Yes</p>
 
-<h3>Release Notes for version 4.1.0</h3>
+<h3>Release Notes for version 4.1.1</h3>
 
-<p>The following changes have been made to the Fortinet FortiManager Connector in version 4.1.0:</p>
+<p>The following changes have been made to the Fortinet FortiManager Connector in version 4.1.1:</p>
 
 <ul>
-    <li>Connector now supports FortiManager-Cloud (Fortinet hosted).</li>
-    <li>Added a new configuration parameter named <strong>FortiManager Type</strong> to choose between <em>FortiManager</em> or <em>FortiManager Cloud</em>.
+    <li>The following changes have been made in the action <strong>Assign Global Policy Package</strong>:
         <ul>
-            <li>The parameter <em>Port</em> is now moved under <strong>FortiManager</strong>.</li>
-        </ul>
-    </li>
-    <li>The configuration parameters <em>FortiManager Type</em> and <em>Port</em> are now mandatory.</li>
-    <li>The <strong>Update Firewall Policy</strong> operation now accepts an address or an address group to add.</li>
-    <li>Added a new input parameter named <em>NGFW Mode</em> in the <strong>ADOM Level Get Blocked IP Addresses</strong> action.</li>
-    <li>Made the <em>NGFW Mode</em> input parameter mandatory in the following actions:
-        <ul>
-            <li>ADOM Level Block IP Address</li>
-            <li>ADOM Level Unblock IP Address</li>
+            <li>Renamed the input parameter <em>Policy Package Name</em> to <strong>Source Policy Package Name</strong>.</li>
+            <li>Added new parameters &mdash; <strong>Destination Policy Package Name</strong> and <strong>Exclude Selected Destination Policy Packages</strong>.</li>
+            <li>Removed the parameter <strong>Policy Package/Folder Path</strong>.</li>
         </ul>
     </li>
 </ul>
@@ -216,7 +208,7 @@
         </tr>
         <tr>
             <td>ADOM Level Unblock IP Address</td>
-            <td>Unlocks IP addresses at the ADOM level on Fortinet FortiGate based on the Firewall policy, address group name, and other input parameters you have specified.</td>
+            <td>Unblocks IP addresses at the ADOM level on Fortinet FortiGate based on the Firewall policy, address group name, and other input parameters you have specified.</td>
             <td>unblock_ip<br />
                 Remediation</td>
         </tr>
@@ -565,6 +557,8 @@
     <li>Global Level Unblock IP Address</li>
     <li>Assign Global Policy Package</li>
 </ul>
+
+<p><strong>NOTE</strong>: These actions are also required for the Data Ingestion functionality, hence Data Ingestion will not work with Fortinet FortiManager Cloud.</p>
 
 <h3>operation: Create Incident</h3>
 
@@ -2222,16 +2216,22 @@
     </thead>
     <tbody>
         <tr>
-            <td>Policy Package Name</td>
+            <td>Source Policy Package Name</td>
             <td>Select the policy package that you want to assign to ADOM devices in the global firewall policy of Fortinet FortiManager. This parameter makes an API call named <code>list_global_policy_pck</code> to dynamically populate its dropdown selections.</td>
-        </tr>
-        <tr>
-            <td>Policy Package/Folder Path</td>
-            <td>Specify the policy package or folder path of the global policy package that you want to assign to ADOM devices in Fortinet FortiManager.</td>
         </tr>
         <tr>
             <td>ADOM Devices</td>
             <td>Specify one or more destination ADOMs to which you want to assign the selected global policy package. This parameter makes an API call named <code>list_global_adom</code> to dynamically populate its dropdown selections.</td>
+        </tr>
+        <tr>
+            <td>Destination Policy Package Name</td>
+            <td>(Optional) Select the destination ADOM policy package name. If not selected, it will be applied to all the packages available in selected ADOM. This parameter makes an API call named <code>list_specific_adom_policy_package</code> to dynamically populate its dropdown selections.
+                <p><strong>NOTE</strong>:This parameter makes an API call <code>list_specific_adom_policy_package</code> to dynamically populate its dropdown selections.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>Exclude Selected Destination Policy Packages</td>
+            <td>(Optional) Specifies whether to exclude packages selected in the destination policy package name and assign to all other packages in the ADOM. By default, this option is set to False, i.e., it only includes the packages listed in the destination policy package name.</td>
         </tr>
     </tbody>
 </table>
@@ -6252,7 +6252,7 @@
 
 <h2>Included playbooks</h2>
 
-<p>The <code><em>Sample - Fortinet Fortimanager - 4.1.0</em></code> playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the <strong>Automation</strong> &gt; <strong>Playbooks</strong> section in FortiSOAR&trade; after importing the Fortinet FortiManager connector.</p>
+<p>The <code><em>Sample - Fortinet Fortimanager - 4.1.1</em></code> playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the <strong>Automation</strong> &gt; <strong>Playbooks</strong> section in FortiSOAR&trade; after importing the Fortinet FortiManager connector.</p>
 
 <ul>
     <li>ADOM Level Block IP Address</li>
