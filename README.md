@@ -10,7 +10,7 @@
 
 <p>Connector Version: 4.1.1</p>
 
-<p>FortiSOAR&trade; Version Tested on: 7.6.0-5012</p>
+<p>FortiSOAR&trade; Version Tested on: 7.6.1-5275</p>
 
 <p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.4.5 build5874 (GA)</p>
 
@@ -2225,7 +2225,7 @@
         </tr>
         <tr>
             <td>Destination Policy Package Name</td>
-            <td>(Optional) Select the destination ADOM policy package name. If not selected, it will be applied to all the packages available in selected ADOM. This parameter makes an API call named <code>list_specific_adom_policy_package</code> to dynamically populate its dropdown selections.
+            <td>(Optional) Select the destination ADOM policy package name. If not selected, it will be applied to all the packages available in selected ADOM.
                 <p><strong>NOTE</strong>:This parameter makes an API call <code>list_specific_adom_policy_package</code> to dynamically populate its dropdown selections.</p>
             </td>
         </tr>
