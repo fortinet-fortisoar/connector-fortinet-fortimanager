@@ -8,37 +8,36 @@
 
 <h3>Version information</h3>
 
-<p>Connector Version: 4.1.1</p>
+<p>Connector Version: 4.1.2</p>
 
-<p>FortiSOAR&trade; Version Tested on: 7.6.1-5275</p>
+<p>FortiSOAR&trade; Version Tested on: 7.6.4-5623</p>
 
-<p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.4.5 build5874 (GA)</p>
+<p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.6.5 build3653 (GA)</p>
 
 <p>Authored By: Fortinet</p>
 
 <p>Certified: Yes</p>
 
-<h3>Release Notes for version 4.1.1</h3>
+### Release Notes for version 4.1.2
 
-<p>The following changes have been made to the Fortinet FortiManager Connector in version 4.1.1:</p>
+The following changes have been made to the Fortinet FortiManager Connector in version 4.1.2:
 
-<ul>
-    <li>The following changes have been made in the action <strong>Assign Global Policy Package</strong>:
-        <ul>
-            <li>Renamed the input parameter <em>Policy Package Name</em> to <strong>Source Policy Package Name</strong>.</li>
-            <li>Added new parameters &mdash; <strong>Destination Policy Package Name</strong> and <strong>Exclude Selected Destination Policy Packages</strong>.</li>
-            <li>Removed the parameter <strong>Policy Package/Folder Path</strong>.</li>
-        </ul>
-    </li>
-</ul>
+- Updated the action **Install Policy**:
+    - Added new parameters - *Scopes* and *Flags*
+    - Removed the parameters - Device name and VDOM
+
+- Updated the action **Re-install Policy**:
+    - Added new parameters - *Scopes* and *Flags*
+
+- Updated the output schemas for all actions
 
 <h2>Installing the connector</h2>
 
 <p>Use the <strong>Content Hub</strong> to install the connector. For the detailed procedure to install a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector" target="_top">here</a>.</p>
 
-<p>You can also use the <code>yum</code> command as a root user to install the connector:</p>
+<p>You can also use the <code>yum</code> command to install the connector:</p>
 
-<pre>yum install cyops-connector-fortinet-fortimanager</pre>
+<pre>sudo yum install cyops-connector-fortinet-fortimanager</pre>
 
 <h2>Prerequisites to configuring the connector</h2>
 
@@ -562,7 +561,7 @@
 
 <h3>operation: Create Incident</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -634,21 +633,23 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "jsonrpc": "",
     "id": "",
     "result": {
         "incid": ""
     }
-}</pre>
+}
+```
 
 <h3>operation: List Incident</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <p><strong>NOTE</strong>: All the input parameters are optional. However, if you do not specify any parameter, then no filter criterion is applied, and an unfiltered list is returned.</p>
 
@@ -723,36 +724,39 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<p>Output schema when you select <em>Detail Level</em> as <em><strong>Basic</strong></em>:</p>
+Output schema when you select <em>Detail Level</em> as <em><strong>Basic</strong></em>
 
-<pre>{ 
-    "jsonrpc": "", 
-    "id": "", 
-    "result": { 
-        "status": { 
-            "code": "", 
-            "message": "" 
-        }, 
-        "detail-level": "", 
-        "data": [ 
-            { 
-                "attach_revision": "", 
-                "attach_lastupdate": "", 
-                "lastupdate": "", 
-                "revision": "", 
-                "incid": "" 
-            } 
-        ] 
-    } 
-}</pre>
+```
+{
+    "jsonrpc": "",
+    "id": "",
+    "result": {
+        "status": {
+            "code": "",
+            "message": ""
+        },
+        "detail-level": "",
+        "data": [
+            {
+                "attach_revision": "",
+                "attach_lastupdate": "",
+                "lastupdate": "",
+                "revision": "",
+                "incid": ""
+            }
+        ]
+    }
+}
+```
 
-<p>Output schema when you select <em>Detail Level</em> as <em><strong>Extended</strong></em>:</p>
+Output schema when you select <em>Detail Level</em> as <em><strong>Extended</strong></em>
 
-<pre>{
+```
+{
     "result": {
         "data": [
             {
@@ -795,11 +799,13 @@
     },
     "id": "",
     "jsonrpc": ""
-}</pre>
+}
+```
 
-<p>This is the default output schema:</p>
+This is the default output schema:
 
-<pre>{
+```
+{
     "result": {
         "data": [
             {
@@ -829,11 +835,12 @@
     },
     "id": "",
     "jsonrpc": ""
-}</pre>
+}
+```
 
 <h3>operation: Get Events Related to Incident</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -886,11 +893,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "result": {
         "data": [
             {
@@ -911,11 +919,12 @@
     },
     "id": "",
     "jsonrpc": ""
-}</pre>
+}
+```
 
 <h3>operation: Get Device List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -938,12 +947,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -1058,11 +1069,12 @@
             ]
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Events</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <p><strong>Note</strong>: All the input parameters are optional. However, if you do not specify any parameter, then no filter criterion is applied, and an unfiltered list is returned.</p>
 
@@ -1120,11 +1132,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "jsonrpc": "",
     "result": {
         "data": [
@@ -1159,11 +1172,12 @@
         ]
     },
     "id": ""
-}</pre>
+}
+```
 
 <h3>operation: Get Event Details</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1209,11 +1223,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
     "result": {
         "data": [
@@ -1242,11 +1257,12 @@
         ]
     },
     "jsonrpc": ""
-}</pre>
+}
+```
 
 <h3>operation: Update Incident</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1327,11 +1343,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "jsonrpc": "",
     "id": "",
     "result": {
@@ -1340,11 +1357,12 @@
             "message": ""
         }
     }
-}</pre>
+}
+```
 
 <h3>operation: List ADOM Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <p><strong>Note</strong>: All the input parameters are optional. However, if you do not specify any parameter, then no filter criterion is applied, and an unfiltered list is returned.</p>
 
@@ -1371,13 +1389,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<p>Output schema when the <strong>Policy Package Name</strong> is not specified:</p>
+Output schema when the <strong>Policy Package Name</strong> is not specified
 
-<pre>{
+```
+{
     "result": [
         {
             "data": [
@@ -1409,11 +1428,13 @@
         }
     ],
     "id": ""
-}</pre>
+}
+```
 
-<p>This is the default output schema:</p>
+This is the default output schema:
 
-<pre>{
+```
+{
     "id": "",
     "result": [
         {
@@ -1443,11 +1464,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: List ADOM Firewall Policies</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1486,103 +1508,154 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": [
                 {
-                    "_last_hit": "",
-                    "_byte": "",
-                    "custom-log-fields": [],
-                    "_pkts": "",
-                    "anti-replay": "",
-                    "_first_hit": "",
-                    "webproxy-profile": [],
-                    "delay-tcp-npu-session": "",
-                    "dstaddr-negate": "",
-                    "tcp-mss-receiver": "",
-                    "internet-service": "",
-                    "srcaddr": [],
-                    "traffic-shaper": [],
-                    "vpn_dst_node": "",
-                    "match-vip-only": "",
-                    "_hitcount": "",
-                    "schedule": [],
-                    "fsso-agent-for-ntlm": [],
-                    "permit-any-host": "",
-                    "schedule-timeout": "",
-                    "radius-mac-auth-bypass": "",
-                    "email-collect": "",
+                    "fec": "",
+                    "oid": "",
+                    "sgt": [],
+                    "tos": "",
+                    "dsri": "",
                     "name": "",
-                    "ssl-mirror-intf": [],
-                    "status": "",
-                    "policyid": "",
-                    "vlan-cos-fwd": "",
-                    "vpn_src_node": "",
-                    "nat": "",
-                    "block-notification": "",
-                    "logtraffic-start": "",
-                    "per-ip-shaper": [],
-                    "tos-negate": "",
-                    "traffic-shaper-reverse": [],
-                    "logtraffic": "",
-                    "np-acceleration": "",
-                    "session-ttl": "",
-                    "uuid": "",
-                    "service-negate": "",
-                    "srcaddr-negate": "",
-                    "wccp": "",
                     "_policy_block": "",
+                    "app-group": [],
+                    "auto-asic-offload": "",
+                    "capture-packet": "",
+                    "disclaimer": "",
+                    "fsso": "",
+                    "inspection-mode": "",
+                    "nat": "",
+                    "per-ip-shaper": [],
+                    "profile-protocol-options": [],
+                    "profile-type": "",
+                    "reputation-direction": "",
+                    "ssl-mirror": "",
+                    "ssl-mirror-intf": [],
+                    "ssl-ssh-profile": [],
+                    "timeout-send-rst": "",
+                    "traffic-shaper": [],
+                    "traffic-shaper-reverse": [],
+                    "utm-status": "",
+                    "webcache-https": "",
+                    "webproxy-forward-server": [],
+                    "webproxy-profile": [],
+                    "scim": "",
+                    "uuid": "",
+                    "wccp": "",
+                    "_byte": "",
+                    "_pkts": "",
+                    "nat46": "",
+                    "nat64": "",
+                    "natip": [],
+                    "users": [],
                     "action": "",
                     "groups": [],
-                    "fsso": "",
-                    "tos": "",
-                    "internet-service-src": "",
-                    "utm-status": "",
-                    "natip": [],
-                    "capture-packet": "",
+                    "status": "",
                     "dstaddr": [],
-                    "tcp-mss-sender": "",
-                    "_first_session": "",
-                    "_sesscount": "",
-                    "_global-vpn-tgt": "",
-                    "srcintf": [],
-                    "tcp-session-without-syn": "",
-                    "timeout-send-rst": "",
-                    "ssl-ssh-profile": [],
-                    "fsso-groups": [],
-                    "service": [],
-                    "vlan-cos-rev": "",
-                    "captive-portal-exempt": "",
-                    "users": [],
-                    "app-group": [],
-                    "webcache-https": "",
-                    "geoip-anycast": "",
-                    "diffserv-forward": "",
-                    "profile-type": "",
-                    "rtp-nat": "",
-                    "reputation-direction": "",
-                    "disclaimer": "",
-                    "webproxy-forward-server": [],
-                    "inspection-mode": "",
-                    "obj seq": "",
-                    "auto-asic-offload": "",
-                    "_global-vpn": [],
-                    "ssl-mirror": "",
                     "dstintf": [],
-                    "_last_session": "",
-                    "match-vip": "",
-                    "diffserv-reverse": "",
-                    "dsri": "",
+                    "obj seq": "",
+                    "rtp-nat": "",
+                    "service": [],
+                    "srcaddr": [],
+                    "srcintf": [],
+                    "comments": "",
+                    "dstaddr6": [],
+                    "policyid": "",
+                    "schedule": [],
+                    "srcaddr6": [],
                     "tos-mask": "",
+                    "_hitcount": "",
+                    "_last_hit": "",
+                    "match-vip": "",
+                    "sgt-check": "",
+                    "_first_hit": "",
+                    "_sesscount": "",
+                    "logtraffic": "",
+                    "scim-users": [],
+                    "tos-negate": "",
+                    "_global-vpn": [],
+                    "anti-replay": "",
+                    "app-monitor": "",
+                    "fsso-groups": [],
+                    "geoip-match": "",
+                    "pcp-inbound": "",
+                    "port-random": "",
+                    "saml-server": [],
+                    "scim-groups": [],
+                    "session-ttl": "",
+                    "ztna-status": "",
+                    "_label-color": "",
+                    "pcp-outbound": "",
+                    "pcp-poolname": [],
+                    "vlan-cos-fwd": "",
+                    "vlan-cos-rev": "",
+                    "vpn_dst_node": "",
+                    "vpn_src_node": "",
+                    "ztna-ems-tag": [],
+                    "_last_session": "",
+                    "email-collect": "",
+                    "geoip-anycast": "",
+                    "policy-expiry": "",
+                    "port-preserve": "",
+                    "_first_session": "",
+                    "dstaddr-negate": "",
+                    "match-vip-only": "",
+                    "service-negate": "",
+                    "src-vendor-mac": [],
+                    "srcaddr-negate": "",
+                    "tcp-mss-sender": "",
+                    "_global-vpn-tgt": "",
+                    "cgn-sw-eif-ctrl": "",
+                    "dstaddr6-negate": "",
+                    "dynamic-shaping": "",
+                    "ip-version-type": "",
+                    "np-acceleration": "",
+                    "permit-any-host": "",
+                    "srcaddr6-negate": "",
+                    "diffserv-forward": "",
+                    "diffserv-reverse": "",
+                    "internet-service": "",
+                    "logtraffic-start": "",
+                    "schedule-timeout": "",
+                    "send-deny-packet": "",
+                    "tcp-mss-receiver": "",
+                    "cgn-session-quota": "",
+                    "custom-log-fields": [],
+                    "internet-service6": "",
+                    "block-notification": "",
+                    "cgn-resource-quota": "",
+                    "policy-expiry-date": "",
                     "reputation-minimum": "",
-                    "profile-protocol-options": [],
-                    "replacemsg-override-group": []
+                    "_global-label-color": "",
+                    "file-filter-profile": [],
+                    "fsso-agent-for-ntlm": [],
+                    "reputation-minimum6": "",
+                    "sctp-filter-profile": [],
+                    "ztna-ems-tag-negate": "",
+                    "internet-service-src": "",
+                    "captive-portal-exempt": "",
+                    "delay-tcp-npu-session": "",
+                    "internet-service6-src": "",
+                    "policy-behaviour-type": "",
+                    "radius-ip-auth-bypass": "",
+                    "radius-mac-auth-bypass": "",
+                    "diameter-filter-profile": [],
+                    "tcp-session-without-syn": "",
+                    "internet-service-src-name": [],
+                    "replacemsg-override-group": [],
+                    "internet-service-fortiguard": [],
+                    "internet-service6-fortiguard": [],
+                    "internet-service-src-fortiguard": [],
+                    "internet-service6-src-fortiguard": []
                 }
             ],
             "status": {
@@ -1592,11 +1665,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: ADOM Level Get Blocked IP Addresses</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1638,11 +1712,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "policy_name": "",
     "dstaddr": [],
     "srcaddr": [],
@@ -1653,11 +1728,12 @@
         }
     ],
     "addrgrp_not_exist": []
-}</pre>
+}
+```
 
 <h3>operation: ADOM Level Block IP Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1703,19 +1779,21 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "already_blocked": [],
     "newly_blocked": [],
     "error_with_block": []
-}</pre>
+}
+```
 
 <h3>operation: ADOM Level Unblock IP Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1761,19 +1839,21 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
-    "not_exist": [],
-    "newly_unblocked": [],
-    "error_with_unblock": []
-}</pre>
+```
+{
+    "already_blocked": [],
+    "newly_blocked": [],
+    "error_with_block": []
+}
+```
 
 <h3>operation: Re-install Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1792,18 +1872,28 @@
             <td>Select the policy package name to which you want to apply the firewall policy in Fortinet FortiManager. This parameter makes an API call named <code>list_adom_policy_package</code> to dynamically populate its dropdown selection.</td>
         </tr>
         <tr>
+            <td>Scopes</td>
+            <td>Specify the device name or device group name on which you want to re-install the policy package.</td>
+        </tr>
+        <tr>
+            <td>Flags</td>
+            <td>(Optional) Specify a comma-separated list of flags on which you want to re-install the policy package.</td>
+        </tr>
+        <tr>
             <td>Policy Package/Folder Path</td>
             <td>(Optional) Specify the policy package or folder path to apply the firewall policy in Fortinet FortiManager.</td>
         </tr>
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -1816,11 +1906,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: List Global Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <p><strong>Note</strong>: All the input parameters are optional. However, if you do not specify any parameter, then no filter criterion is applied, and an unfiltered list is returned.</p>
 
@@ -1843,13 +1934,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<p>Output schema when the "Package Name" is not specified:</p>
+Output schema when the "Package Name" is not specified
 
-<pre>{
+```
+{
     "result": [
         {
             "url": "",
@@ -1880,11 +1972,13 @@
         }
     ],
     "id": ""
-}</pre>
+}
+```
 
-<p>This is the default output schema:</p>
+This is the default output schema:
 
-<pre>{
+```
+{
     "result": [
         {
             "url": "",
@@ -1913,11 +2007,12 @@
         }
     ],
     "id": ""
-}</pre>
+}
+```
 
 <h3>operation: List Global Firewall Policies</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -1946,11 +2041,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "result": [
         {
             "url": "",
@@ -2051,11 +2147,12 @@
         }
     ],
     "id": ""
-}</pre>
+}
+```
 
 <h3>operation: Global Level Get Blocked IP Addresses</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2088,11 +2185,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "policy_name": "",
     "dstaddr": [],
     "srcaddr": [],
@@ -2103,11 +2201,12 @@
         }
     ],
     "addrgrp_not_exist": []
-}</pre>
+}
+```
 
 <h3>operation: Global Level Block IP Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2144,19 +2243,21 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "already_blocked": [],
     "newly_blocked": [],
     "error_with_block": []
-}</pre>
+}
+```
 
 <h3>operation: Global Level Unblock IP Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2193,19 +2294,21 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "not_exist": [],
     "newly_unblocked": [],
     "error_with_unblock": []
-}</pre>
+}
+```
 
 <h3>operation: Assign Global Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2236,11 +2339,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
     "result": [
         {
@@ -2254,11 +2358,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Device Groups List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2328,21 +2433,25 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": {
+                "id": "",
                 "oid": "",
                 "desc": "",
                 "name": "",
                 "type": "",
-                "os_type": ""
+                "os_type": "",
+                "cluster_type": ""
             },
             "status": {
                 "code": "",
@@ -2350,11 +2459,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2437,12 +2547,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2455,11 +2567,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Addresses List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2531,12 +2644,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2546,32 +2661,41 @@
             },
             "data": [
                 {
+                    "oid": "",
+                    "allow-routing": "",
+                    "comment": "",
+                    "macaddr": [],
+                    "subnet": [],
+                    "sdn": [],
                     "list": "",
                     "name": "",
                     "type": "",
                     "uuid": "",
                     "color": "",
-                    "subnet": [],
-                    "comment": "",
-                    "macaddr": [],
+                    "dirty": "",
+                    "filter": "",
                     "tagging": "",
+                    "agent-id": [],
                     "obj-type": "",
+                    "sub-type": "",
+                    "route-tag": "",
                     "node-ip-only": "",
-                    "allow-routing": "",
                     "clearpass-spt": "",
                     "fabric-object": "",
                     "sdn-addr-type": "",
                     "dynamic_mapping": "",
+                    "sso-attribute-value": [],
                     "associated-interface": []
                 }
             ]
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2654,12 +2778,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2672,11 +2798,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Address</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2707,12 +2834,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2722,11 +2851,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Address Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2784,12 +2914,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2802,11 +2934,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Address Groups List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2878,22 +3011,26 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
+                    "oid": "",
                     "name": "",
                     "type": "",
                     "uuid": "",
                     "color": "",
                     "member": [],
+                    "comment": "",
                     "exclude": "",
                     "tagging": "",
                     "category": "",
@@ -2909,11 +3046,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Address Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -2970,12 +3108,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -2988,11 +3128,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Address Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3023,12 +3164,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3038,11 +3181,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Service Categories List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3114,19 +3258,23 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
+                    "oid": "",
                     "name": "",
                     "comment": "",
+                    "uuid": "",
                     "obj seq": "",
                     "fabric-object": ""
                 }
@@ -3137,11 +3285,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Service Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3188,12 +3337,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3206,11 +3357,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Service Groups List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3282,20 +3434,26 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
+                    "oid": "",
                     "name": "",
+                    "uuid": "",
+                    "color": "",
+                    "proxy": "",
                     "member": [],
-                    "global-object": ""
+                    "fabric-object": ""
                 }
             ],
             "status": {
@@ -3304,11 +3462,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Service Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3360,12 +3519,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3378,11 +3539,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Service Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3413,12 +3575,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3428,11 +3592,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Custom Service</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3588,12 +3753,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3606,11 +3773,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Custom Services List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3682,33 +3850,46 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
+                    "oid": "",
                     "name": "",
+                    "uuid": "",
                     "color": "",
                     "proxy": "",
                     "helper": "",
-                    "iprange": "",
+                    "comment": "",
                     "obj seq": "",
+                    "protocol-number": "",
+                    "visibility": "",
+                    "iprange": "",
                     "category": [],
                     "protocol": "",
-                    "visibility": "",
                     "application": [],
+                    "session-ttl": "",
                     "app-category": [],
                     "fabric-object": "",
+                    "tcp-portrange": [],
                     "tcp-rst-timer": "",
                     "udp-portrange": [],
-                    "protocol-number": "",
-                    "app-service-type": ""
+                    "sctp-portrange": [],
+                    "udp-idle-timer": "",
+                    "app-service-type": "",
+                    "check-reset-range": "",
+                    "tcp-halfopen-timer": "",
+                    "tcp-timewait-timer": "",
+                    "tcp-halfclose-timer": ""
                 }
             ],
             "status": {
@@ -3717,11 +3898,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Custom Service</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3877,12 +4059,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3895,11 +4079,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Custom Service</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -3930,12 +4115,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -3945,11 +4132,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4012,12 +4200,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4027,11 +4217,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4102,12 +4293,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4117,11 +4310,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Policy Package</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4156,12 +4350,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4171,11 +4367,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create Firewall Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4302,12 +4499,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -4320,11 +4519,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update Firewall Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4433,12 +4633,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -4451,11 +4653,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete Firewall Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4499,12 +4702,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4514,11 +4719,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Move Firewall Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4570,12 +4776,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4588,11 +4796,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Dynamic Interface List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4661,32 +4870,41 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
+                    "oid": "",
                     "name": "",
                     "color": "",
                     "wildcard": "",
+                    "zone-only": "",
+                    "description": "",
                     "single-intf": "",
                     "default-mapping": "",
                     "dynamic_mapping": "",
                     "platform_mapping": [
                         {
+                            "oid": "",
                             "name": "",
                             "intf-zone": "",
-                            "intrazone-deny": ""
+                            "intrazone-deny": "",
+                            "egress-shaping-profile": []
                         }
                     ],
                     "defmap-zonemember": [],
-                    "defmap-intrazone-deny": ""
+                    "defmap-intrazone-deny": "",
+                    "egress-shaping-profile": [],
+                    "ingress-shaping-profile": []
                 }
             ],
             "status": {
@@ -4695,11 +4913,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Install Policy</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4718,6 +4937,14 @@
             <td>Select the name of the policy package that you want to install in Fortinet FortiManager. This parameter will make an API call named <code>list_adom_policy_package</code> to dynamically populate its dropdown selections.</td>
         </tr>
         <tr>
+            <td>Scopes</td>
+            <td>Specify the device name or device group name on which you want to install the policy package.</td>
+        </tr>
+        <tr>
+            <td>Flags</td>
+            <td>(Optional) Specify a comma-separated list of flags on which you want to install the policy package.</td>
+        </tr>
+        <tr>
             <td>ADOM Revision Comment</td>
             <td>Specify the ADOM revision comment of the policy that you want to install in Fortinet FortiManager</td>
         </tr>
@@ -4729,23 +4956,17 @@
             <td>Device Configuration Revision</td>
             <td>Comments that you want to add for the device configuration revision that will be generated during the installation.</td>
         </tr>
-        <tr>
-            <td>Device Name</td>
-            <td>Specify the device name or device group name on which you want to install the policy package.</td>
-        </tr>
-        <tr>
-            <td>VDOM</td>
-            <td>Specify the VDOM on which you want to install the policy package.</td>
-        </tr>
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4758,11 +4979,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Installation Policy Package Status</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4779,12 +5001,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -4799,18 +5023,12 @@
                         "err": "",
                         "oid": "",
                         "name": "",
+                        "poid": "",
                         "vdom": "",
                         "state": "",
                         "detail": "",
                         "end_tm": "",
                         "history": [
-                            {
-                                "name": "",
-                                "vdom": "",
-                                "state": "",
-                                "detail": "",
-                                "percent": ""
-                            },
                             {
                                 "name": "",
                                 "vdom": "",
@@ -4842,11 +5060,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create LDAP Server</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -4920,12 +5139,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -4938,11 +5159,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get LDAP Server List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5011,27 +5233,64 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
-            "data": [],
+            "data": [
+                {
+                    "dynamic_mapping": "",
+                    "oid": "",
+                    "name": "",
+                    "_if_no_default": "",
+                    "server": "",
+                    "cnid": "",
+                    "dn": "",
+                    "port": "",
+                    "type": "",
+                    "secure": "",
+                    "member-attr": "",
+                    "password-expiry-warning": "",
+                    "password-renewal": "",
+                    "group-member-check": "",
+                    "search-type": "",
+                    "account-key-processing": "",
+                    "account-key-filter": "",
+                    "ssl-min-proto-version": "",
+                    "obtain-user-info": "",
+                    "user-info-exchange-server": [],
+                    "two-factor": "",
+                    "two-factor-notification": "",
+                    "interface-select-method": "",
+                    "interface": [],
+                    "source-port": "",
+                    "antiphish": "",
+                    "password-attr": "userPassword",
+                    "client-cert-auth": "",
+                    "client-cert": [],
+                    "account-key-cert-field": "",
+                    "status-ttl": ""
+                }
+            ],
             "status": {
                 "code": "",
                 "message": ""
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update LDAP Server</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5105,12 +5364,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -5123,11 +5384,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete LDAP Server</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5153,12 +5415,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -5168,11 +5432,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Create User Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5206,12 +5471,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -5224,11 +5491,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get User Groups List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5297,12 +5565,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -5328,11 +5598,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update User Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5371,12 +5642,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "data": {
@@ -5389,11 +5662,12 @@
             "url": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Delete User Group</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5419,12 +5693,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -5434,11 +5710,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get SSL VPN Settings</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5468,19 +5745,45 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": {
+                "oid": "",
+                "port": "",
+                "status": "",
                 "algorithm": "",
-                "auth-session-check-source-ip": "",
+                "dns-suffix": "",
+                "servercert": [],
+                "ciphersuite": "",
                 "auth-timeout": "",
+                "idle-timeout": "",
+                "banned-cipher": "",
+                "check-referer": "",
+                "login-timeout": "",
+                "reqclientcert": "",
+                "client-sigalgs": "",
+                "https-redirect": "",
+                "dual-stack-mode": "",
+                "port-precedence": "",
+                "server-hostname": "",
+                "url-obscuration": "",
+                "http-compression": "",
+                "http-only-cookie": "",
+                "login-block-time": "",
+                "source-interface": [],
+                "ssl-max-proto-ver": "",
+                "ssl-min-proto-ver": "",
+                "dtls-hello-timeout": "",
+                "encode-2f-sequence": "",
                 "authentication-rule": [
                     {
                         "auth": "",
@@ -5500,65 +5803,47 @@
                     }
                 ],
                 "auto-tunnel-static-route": "",
-                "banned-cipher": "",
-                "check-referer": "",
-                "ciphersuite": "",
-                "client-sigalgs": "",
                 "default-portal": [],
-                "deflate-compression-level": "",
-                "deflate-min-data-size": "",
                 "dns-server1": "",
                 "dns-server2": "",
-                "dns-suffix": "",
-                "dtls-hello-timeout": "",
                 "dtls-max-proto-ver": "",
                 "dtls-min-proto-ver": "",
                 "dtls-tunnel": "",
-                "dual-stack-mode": "",
-                "encode-2f-sequence": "",
-                "encrypt-and-store-password": "",
-                "force-two-factor-auth": "",
-                "header-x-forwarded-for": "",
-                "hsts-include-subdomains": "",
-                "http-compression": "",
-                "http-only-cookie": "",
-                "http-request-body-timeout": "",
-                "http-request-header-timeout": "",
-                "https-redirect": "",
-                "idle-timeout": "",
                 "ipv6-dns-server1": "",
                 "ipv6-dns-server2": "",
                 "ipv6-wins-server1": "",
                 "ipv6-wins-server2": "",
-                "login-attempt-limit": "",
-                "login-block-time": "",
-                "login-timeout": "",
-                "port": "",
-                "port-precedence": "",
-                "reqclientcert": "",
                 "saml-redirect-port": "",
-                "servercert": [],
                 "source-address": [],
                 "source-address-negate": "",
                 "source-address6": [],
                 "source-address6-negate": "",
-                "source-interface": [],
-                "ssl-client-renegotiation": "",
-                "ssl-insert-empty-fragment": "",
-                "ssl-max-proto-ver": "",
-                "ssl-min-proto-ver": "",
-                "status": "",
-                "transform-backward-slashes": "",
                 "tunnel-addr-assigned-method": "",
                 "tunnel-connect-without-reauth": "",
                 "tunnel-ip-pools": [],
                 "tunnel-ipv6-pools": [],
                 "tunnel-user-session-timeout": "",
-                "unsafe-legacy-renegotiation": "",
-                "url-obscuration": "",
                 "wins-server1": "",
                 "wins-server2": "",
-                "x-content-type-options": ""
+                "login-attempt-limit": "",
+                "deflate-min-data-size": "",
+                "force-two-factor-auth": "",
+                "header-x-forwarded-for": "",
+                "x-content-type-options": "",
+                "dtls-heartbeat-interval": "",
+                "hsts-include-subdomains": "",
+                "ssl-client-renegotiation": "",
+                "deflate-compression-level": "",
+                "dtls-heartbeat-fail-count": "",
+                "http-request-body-timeout": "",
+                "ssl-insert-empty-fragment": "",
+                "browser-language-detection": "",
+                "encrypt-and-store-password": "",
+                "transform-backward-slashes": "",
+                "dtls-heartbeat-idle-timeout": "",
+                "http-request-header-timeout": "",
+                "unsafe-legacy-renegotiation": "",
+                "auth-session-check-source-ip": ""
             },
             "status": {
                 "code": "",
@@ -5566,11 +5851,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Update SSL VPN Settings</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5653,12 +5939,14 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
@@ -5668,11 +5956,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Web Filter List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5733,102 +6022,113 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
-            "data": [
-                {
-                    "antiphish": {
-                        "authentication": "",
-                        "check-basic-auth": "",
-                        "check-uri": "",
-                        "check-username-only": "",
-                        "custom-patterns": "",
-                        "default-action": "",
-                        "domain-controller": [],
-                        "inspection-entries": "",
-                        "ldap": [],
-                        "max-body-len": "",
-                        "status": ""
-                    },
-                    "ftgd-wf": {
-                        "exempt-quota": [],
-                        "filters": [
-                            {
-                                "action": "",
-                                "category": [],
-                                "id": "",
-                                "log": "",
-                                "warn-duration": "",
-                                "warning-prompt": ""
-                            }
-                        ],
-                        "max-quota-timeout": "",
-                        "options": "",
-                        "ovrd": [],
-                        "quota": "",
-                        "rate-crl-urls": "",
-                        "rate-css-urls": "",
-                        "rate-javascript-urls": ""
-                    },
-                    "override": {
-                        "ovrd-cookie": "",
-                        "ovrd-dur": "",
-                        "ovrd-dur-mode": "",
-                        "ovrd-scope": "",
-                        "ovrd-user-group": [],
-                        "profile": [],
-                        "profile-attribute": "",
-                        "profile-type": ""
-                    },
-                    "url-extraction": "",
-                    "web": {
-                        "allowlist": "",
-                        "blocklist": "",
-                        "bword-table": [],
-                        "bword-threshold": "",
-                        "content-header-list": [],
-                        "urlfilter-table": [],
-                        "vimeo-restrict": "",
-                        "youtube-restrict": ""
-                    },
-                    "name": "",
-                    "web-content-log": "",
-                    "web-filter-cookie-log": "",
-                    "web-url-log": "",
-                    "web-invalid-domain-log": "",
-                    "web-ftgd-err-log": "",
+            "data": {
+                "oid": "",
+                "web": {
+                    "oid": "",
+                    "allowlist": "",
+                    "blocklist": "",
+                    "bword-table": [],
+                    "safe-search": "",
+                    "bword-threshold": "",
+                    "urlfilter-table": [],
+                    "vimeo-restrict": "",
+                    "youtube-restrict": "",
+                    "content-header-list": []
+                },
+                "name": "",
+                "wisp": "",
+                "comment": "",
+                "ftgd-wf": {
+                    "oid": "",
+                    "ovrd": [],
+                    "risk": "",
+                    "quota": "",
+                    "filters": [
+                        {
+                            "id": "",
+                            "log": "",
+                            "oid": "",
+                            "action": "",
+                            "category": [],
+                            "warn-duration": "",
+                            "warning-prompt": ""
+                        }
+                    ],
+                    "unset attrs": [],
+                    "exempt-quota": [],
+                    "rate-crl-urls": "",
+                    "rate-css-urls": "",
+                    "max-quota-timeout": "",
                     "options": "",
-                    "ovrd-perm": "",
-                    "post-action": "",
-                    "replacemsg-group": [],
-                    "https-replacemsg": "",
-                    "log-all-url": "",
-                    "web-filter-command-block-log": "",
-                    "wisp": "",
-                    "wisp-algorithm": "",
-                    "extended-log": "",
-                    "web-extended-all-action-log": "",
-                    "feature-set": ""
-                }
-            ],
+                    "rate-javascript-urls": ""
+                },
+                "options": "",
+                "override": {
+                    "oid": "",
+                    "profile": [],
+                    "ovrd-dur": "",
+                    "ovrd-scope": "",
+                    "ovrd-cookie": "",
+                    "profile-type": "",
+                    "ovrd-dur-mode": "",
+                    "ovrd-user-group": [],
+                    "profile-attribute": ""
+                },
+                "antiphish": {
+                    "authentication": "",
+                    "check-basic-auth": "",
+                    "check-uri": "",
+                    "check-username-only": "",
+                    "custom-patterns": "",
+                    "default-action": "",
+                    "domain-controller": [],
+                    "inspection-entries": "",
+                    "ldap": [],
+                    "max-body-len": "",
+                    "status": ""
+                },
+                "ovrd-perm": "",
+                "feature-set": "",
+                "log-all-url": "",
+                "post-action": "",
+                "web-url-log": "",
+                "extended-log": "",
+                "url-extraction": "",
+                "wisp-algorithm": "",
+                "web-content-log": "",
+                "https-replacemsg": "",
+                "replacemsg-group": [],
+                "web-ftgd-err-log": "",
+                "web-filter-cookie-log": "",
+                "web-flow-log-encoding": "",
+                "web-invalid-domain-log": "",
+                "web-extended-all-action-log": "",
+                "web-filter-command-block-log": ""
+            },
             "status": {
                 "code": "",
                 "message": ""
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Blocked URLs</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5855,39 +6155,33 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
-    "id": "",
-    "result": [
+```
+{
+    "data": [
         {
+            "id": "",
+            "oid": "",
             "url": "",
-            "data": [
-                {
-                    "action": "",
-                    "antiphish-action": "",
-                    "dns-address-family": "",
-                    "id": "",
-                    "obj seq": "",
-                    "status": "",
-                    "type": "",
-                    "url": "",
-                    "web-proxy-profile": []
-                }
-            ],
-            "status": {
-                "code": "",
-                "message": ""
-            }
+            "type": "",
+            "action": "",
+            "status": "",
+            "obj seq": "",
+            "referrer-host": "",
+            "antiphish-action": "",
+            "web-proxy-profile": [],
+            "dns-address-family": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Block URL</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5916,18 +6210,20 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "already_blocked": [],
     "newly_blocked": []
-}</pre>
+}
+```
 
 <h3>operation: Unblock URL</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -5956,49 +6252,54 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "not_exist": [],
     "newly_unblocked": []
-}</pre>
+}
+```
 
 <h3>operation: Get Applications Detail</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <p>None.</p>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
-                    "behavior": "",
+                    "id": "",
                     "casi": "",
+                    "name": "",
+                    "risk": "",
                     "cat-id": "",
+                    "objver": "",
+                    "vendor": "",
+                    "weight": "",
+                    "shaping": "",
+                    "behavior": "",
                     "category": "",
                     "database": "",
-                    "id": "",
                     "language": "",
-                    "name": "",
+                    "protocol": "",
                     "parameter": "",
                     "popularity": "",
-                    "protocol": "",
-                    "require_ssl_di": "",
-                    "risk": "",
-                    "shaping": "",
                     "technology": "",
-                    "vendor": "",
-                    "weight": ""
+                    "require_ssl_di": ""
                 }
             ],
             "status": {
@@ -6008,11 +6309,12 @@
             "version": ""
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Applications Control List</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -6043,62 +6345,67 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>{
+```
+{
     "id": "",
+    "cid": "",
     "result": [
         {
             "url": "",
             "data": [
                 {
-                    "default-network-services": "",
+                    "oid": "",
+                    "name": "",
+                    "comment": "",
                     "entries": [
                         {
+                            "id": "",
+                            "log": "",
+                            "oid": "",
+                            "risk": [],
                             "action": "",
-                            "application": [],
+                            "shaper": [],
+                            "vendor": [],
+                            "obj seq": "",
                             "behavior": [],
                             "category": [],
                             "exclusion": [],
-                            "id": "",
-                            "log": "",
-                            "log-packet": "",
-                            "obj seq": "",
-                            "parameters": "",
-                            "per-ip-shaper": [],
-                            "popularity": "",
                             "protocols": [],
-                            "quarantine": "",
-                            "quarantine-expiry": "",
-                            "quarantine-log": "",
-                            "rate-count": "",
-                            "rate-duration": "",
                             "rate-mode": "",
+                            "log-packet": "",
+                            "parameters": "",
+                            "popularity": "",
+                            "quarantine": "",
+                            "rate-count": "",
                             "rate-track": "",
-                            "risk": [],
-                            "session-ttl": "",
-                            "shaper": [],
-                            "shaper-reverse": [],
                             "technology": [],
-                            "vendor": []
+                            "application": [],
+                            "session-ttl": "",
+                            "per-ip-shaper": [],
+                            "rate-duration": "",
+                            "quarantine-log": "",
+                            "shaper-reverse": [],
+                            "quarantine-expiry": ""
                         }
                     ],
-                    "name": "",
-                    "other-application-action": "",
-                    "other-application-log": "",
-                    "unknown-application-action": "",
-                    "unknown-application-log": "",
-                    "replacemsg-group": [],
                     "options": "",
-                    "app-replacemsg": "",
-                    "deep-app-inspection": "",
                     "extended-log": "",
+                    "app-replacemsg": "",
+                    "p2p-block-list": "",
+                    "replacemsg-group": [],
+                    "deep-app-inspection": "",
+                    "other-application-log": "",
+                    "unknown-application-log": "",
+                    "default-network-services": "",
                     "enforce-default-app-port": "",
-                    "control-default-network-services": "",
+                    "other-application-action": "",
+                    "unknown-application-action": "",
                     "force-inclusion-ssl-di-sigs": "",
-                    "p2p-block-list": ""
+                    "control-default-network-services": ""
                 }
             ],
             "status": {
@@ -6107,11 +6414,12 @@
             }
         }
     ]
-}</pre>
+}
+```
 
 <h3>operation: Get Blocked Applications</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -6138,11 +6446,12 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>[
+```
+[
     {
         "behavior": "",
         "casi": "",
@@ -6160,13 +6469,15 @@
         "shaping": "",
         "technology": "",
         "vendor": "",
-        "weight": ""
+        "weight": "",
+        "objver": ""
     }
-]</pre>
+]
+```
 
 <h3>operation: Block Application</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -6195,21 +6506,23 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>[
+```
+[
     {
         "name": "",
         "message": "",
         "status": ""
     }
-]</pre>
+]
+```
 
 <h3>operation: Unblock Application</h3>
 
-<h4>Input parameters</h4>
+#### Input parameters
 
 <table border="1">
     <thead>
@@ -6238,95 +6551,97 @@
     </tbody>
 </table>
 
-<h4>Output</h4>
+#### Output
 
-<p>The output contains the following populated JSON schema:</p>
+The output contains the following populated JSON schema:
 
-<pre>[
+```
+[
     {
         "name": "",
         "message": "",
         "status": ""
     }
-]</pre>
+]
+```
 
 <h2>Included playbooks</h2>
 
-<p>The <code><em>Sample - Fortinet Fortimanager - 4.1.1</em></code> playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the <strong>Automation</strong> &gt; <strong>Playbooks</strong> section in FortiSOAR&trade; after importing the Fortinet FortiManager connector.</p>
+The *`Sample - Fortinet Fortimanager - 4.1.2`* playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** &gt; **Playbooks** section in FortiSOAR&trade; after importing the Fortinet FortiManager connector.
 
-<ul>
-    <li>ADOM Level Block IP Address</li>
-    <li>ADOM Level Get Blocked IP Addresses</li>
-    <li>ADOM Level Unblock IP Address</li>
-    <li>Assign Global Policy Package</li>
-    <li>Block Application</li>
-    <li>Block URL</li>
-    <li>Create Address</li>
-    <li>Create Address Group</li>
-    <li>Create Custom Service</li>
-    <li>Create Firewall Policy</li>
-    <li>Create Incident</li>
-    <li>Create LDAP Server</li>
-    <li>Create Policy Package</li>
-    <li>Create Service Group</li>
-    <li>Create User Group</li>
-    <li>Delete Address</li>
-    <li>Delete Address Group</li>
-    <li>Delete Custom Service</li>
-    <li>Delete Firewall Policy</li>
-    <li>Delete LDAP Server</li>
-    <li>Delete Policy Package</li>
-    <li>Delete Service Group</li>
-    <li>Delete User Group</li>
-    <li>&gt; Fortinet-FortiManager &gt; Fetch and Create</li>
-    <li>Fortinet-FortiManager &gt; Ingest</li>
-    <li>Fortinet-FortiManager &gt; Fetch Incident Events</li>
-    <li>Get Address Groups List</li>
-    <li>Get Addresses List</li>
-    <li>Get Applications Control List</li>
-    <li>Get Applications Detail</li>
-    <li>Get Blocked Applications</li>
-    <li>Get Blocked URLs</li>
-    <li>Get Custom Services List</li>
-    <li>Get Device Groups List</li>
-    <li>Get Device List</li>
-    <li>Get Dynamic Interface List</li>
-    <li>Get Event Details</li>
-    <li>Get Events</li>
-    <li>Get Events Related to Incident</li>
-    <li>Get Installation Policy Package Status</li>
-    <li>Get LDAP Server List</li>
-    <li>Get SSL VPN Settings</li>
-    <li>Get Service Categories List</li>
-    <li>Get Service Groups List</li>
-    <li>Get User Groups List</li>
-    <li>Get Web Filter List</li>
-    <li>Global Level Block IP Address</li>
-    <li>Global Level Get Blocked IP Addresses</li>
-    <li>Global Level Unblock IP Address</li>
-    <li>Install Policy</li>
-    <li>List ADOM Firewall Policies</li>
-    <li>List ADOM Policy Package</li>
-    <li>List Global Firewall Policies</li>
-    <li>List Global Policy Package</li>
-    <li>List Incident</li>
-    <li>Move Firewall Policy</li>
-    <li>Re-install Policy</li>
-    <li>Unblock Application</li>
-    <li>Unblock URL</li>
-    <li>Update Address</li>
-    <li>Update Address Group</li>
-    <li>Update Custom Service</li>
-    <li>Update Firewall Policy</li>
-    <li>Update Incident</li>
-    <li>Update LDAP Server</li>
-    <li>Update Policy Package</li>
-    <li>Update SSL VPN Settings</li>
-    <li>Update Service Group</li>
-    <li>Update User Group</li>
-</ul>
+- ADOM Level Block IP Address
+- ADOM Level Get Blocked IP Addresses
+- ADOM Level Unblock IP Address
+- Assign Global Policy Package
+- Block Application
+- Block URL
+- Create Address
+- Create Address Group
+- Create Custom Service
+- Create Firewall Policy
+- Create Incident
+- Create LDAP Server
+- Create Policy Package
+- Create Service Group
+- Create User Group
+- Delete Address
+- Delete Address Group
+- Delete Custom Service
+- Delete Firewall Policy
+- Delete LDAP Server
+- Delete Policy Package
+- Delete Service Group
+- Delete User Group
+- &gt; Fortinet-FortiManager &gt; Fetch and Create
+- Fortinet-FortiManager &gt; Ingest
+- Fortinet-FortiManager &gt; Fetch Incident Events
+- Get Address Groups List
+- Get Addresses List
+- Get Applications Control List
+- Get Applications Detail
+- Get Blocked Applications
+- Get Blocked URLs
+- Get Custom Services List
+- Get Device Groups List
+- Get Device List
+- Get Dynamic Interface List
+- Get Event Details
+- Get Events
+- Get Events Related to Incident
+- Get Installation Policy Package Status
+- Get LDAP Server List
+- Get SSL VPN Settings
+- Get Service Categories List
+- Get Service Groups List
+- Get User Groups List
+- Get Web Filter List
+- Global Level Block IP Address
+- Global Level Get Blocked IP Addresses
+- Global Level Unblock IP Address
+- Install Policy
+- List ADOM Firewall Policies
+- List ADOM Policy Package
+- List Global Firewall Policies
+- List Global Policy Package
+- List Incident
+- Move Firewall Policy
+- Re-install Policy
+- Unblock Application
+- Unblock URL
+- Update Address
+- Update Address Group
+- Update Custom Service
+- Update Firewall Policy
+- Update Incident
+- Update LDAP Server
+- Update Policy Package
+- Update SSL VPN Settings
+- Update Service Group
+- Update User Group
 
-<p><strong>Note</strong>: If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection since the sample playbook collection gets deleted during the connector upgrade and delete.</p>
+____
+**Note**: If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection since the sample playbook collection gets deleted during the connector upgrade and delete.
+____
 
 <h2><a id="dataIngestion" name="dataIngestion"></a>Data Ingestion Support</h2>
 
