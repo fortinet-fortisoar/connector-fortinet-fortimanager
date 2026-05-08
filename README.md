@@ -1,79 +1,72 @@
-<h2>About the connector</h2>
+## About the connector
 
-<p>Fortinet FortiManager provides easy centralized configuration, policy-based provisioning, update management, and end-to-end network monitoring for your Fortinet-installed environment.</p>
+Fortinet FortiManager provides easy centralized configuration, policy-based provisioning, update management, and end-to-end network monitoring for your Fortinet-installed environment.
 
-<p>This document provides information about the Fortinet FortiManager Connector, which facilitates automated interactions with your Fortinet FortiManager server using FortiSOAR&trade; playbooks. Add the Fortinet FortiManager connector, as a step in FortiSOAR&trade; playbooks and perform automated operations such as retrieving a list of all devices configured on the Fortinet FortiManager server, creating and updating incidents on the Fortinet FortiManager server, and retrieving a list of all incidents from the Fortinet FortiManager server.</p>
+This document provides information about the Fortinet FortiManager Connector, which facilitates automated interactions with your Fortinet FortiManager server using FortiSOAR playbooks. Add the Fortinet FortiManager connector, as a step in FortiSOAR playbooks and perform automated operations such as retrieving a list of all devices configured on the Fortinet FortiManager server, creating and updating incidents on the Fortinet FortiManager server, and retrieving a list of all incidents from the Fortinet FortiManager server.
 
-<p>You can use FortiSOAR&trade;'s Data Ingestion Wizard to easily ingest data into FortiSOAR&trade; by pulling incidents from Fortinet FortiManager. For more information, see the <a href="#dataIngestion">Data Ingestion Support</a> topic.</p>
+You can use FortiSOAR's Data Ingestion Wizard to easily ingest data into FortiSOAR by pulling incidents from Fortinet FortiManager. For more information, see the [Data Ingestion Support](#data-ingestion-support) topic.
 
-<h3>Version information</h3>
+### Version information
 
-<p>Connector Version: 4.1.2</p>
+Connector Version: 4.1.3
 
-<p>FortiSOAR&trade; Version Tested on: 7.6.4-5623</p>
+FortiSOAR Version Tested on: 7.6.5-5662
 
-<p>Fortinet FortiManager Version Tested on: FortiManager Cloud v7.6.5 build3653 (GA)</p>
+Fortinet FortiManager Version Tested on: FortiManager Cloud v7.6.5 build3653 (GA)
 
-<p>Authored By: Fortinet</p>
+Authored By: Fortinet
 
-<p>Certified: Yes</p>
+Certified: Yes
 
-### Release Notes for version 4.1.2
+>[!NOTE]
+>
+>This connector supports ingestion of alerts. For details refer to [Alert Ingestion](#Alert_Ingestion_Support) section
+>
 
-The following changes have been made to the Fortinet FortiManager Connector in version 4.1.2:
+### Release Notes for version 4.1.3
 
-- Updated the action **Install Policy**:
-    - Added new parameters - *Scopes* and *Flags*
-    - Removed the parameters - Device name and VDOM
+The following changes have been made to the Fortinet FortiManager Connector in version 4.1.3:
 
-- Updated the action **Re-install Policy**:
-    - Added new parameters - *Scopes* and *Flags*
+- Updated the action **Install Policy** to add a new parameter - *Policy Package/Folder Path*
 
-- Updated the output schemas for all actions
+- Updated the action **Re-Install Policy** to add a new parameter - *Reinstall Policy Package*
 
-<h2>Installing the connector</h2>
+- Fixed the issue where sessions were logging out after 10 minutes.
 
-<p>Use the <strong>Content Hub</strong> to install the connector. For the detailed procedure to install a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector" target="_top">here</a>.</p>
+- Resolved the nested subfolder issue for the actions **Install Policy** and **Re-install Policy**. These actions now support nested folders; previously, they worked only for a single directory structure.
 
-<p>You can also use the <code>yum</code> command to install the connector:</p>
+## Installing the connector
 
-<pre>sudo yum install cyops-connector-fortinet-fortimanager</pre>
+Use the **Content Hub** to install the connector. For the detailed procedure to install a connector, click [here](https://docs.fortinet.com/document/fortisoar/0.0.0/installing-a-connector/1/installing-a-connector).
 
-<h2>Prerequisites to configuring the connector</h2>
+## Prerequisites to configuring the connector
 
-<ul>
-    <li>You must have the IP address or hostname of the Fortinet FortiManager server to which you will connect and perform automated operations and credentials (username-password pair) to access that server.</li>
-    <li>You must enable <em>FortiAnalyzer Features</em> in FortiManager to perform the following operations:
-        <ul>
-            <li>Create Incident</li>
-            <li>List Incident</li>
-            <li>Get Events Related to Incident</li>
-            <li>Get Events</li>
-            <li>Get Events Details</li>
-            <li>Update Incident</li>
-        </ul>
-    </li>
-    <li>You must enable the <em>Administrative Domain</em> features in FortiManager.</li>
-    <li>The FortiSOAR&trade; server should have outbound connectivity to port 443 on the Fortinet FortiManager server.</li>
-    <li>You must add the configurations required to block or unblock IP addresses, URLs, or applications in Fortinet FortiManager. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-</ul>
+-   You must have the IP address or hostname of the Fortinet FortiManager server to which you will connect and perform automated operations and credentials (username-password pair) to access that server.
+-   You must enable *FortiAnalyzer Features* in FortiManager to perform the following operations:
+    -   Create Incident
+    -   List Incident
+    -   Get Events Related to Incident
+    -   Get Events
+    -   Get Events Details
+    -   Update Incident
+-   You must enable the *Administrative Domain* features in FortiManager.
+-   The FortiSOAR™ server should have outbound connectivity to port 443 on the Fortinet FortiManager server.
+-   You must add the configurations required to block or unblock IP addresses, URLs, or applications in Fortinet FortiManager. For more information, see the [Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager](#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager) section.
 
-<h2>Minimum Permissions Required</h2>
+## Minimum Permissions Required
 
-<p>The minimum privileges that require to be assigned to users who are going to use this connector and run actions on Fortinet FortiManager are:</p>
+The minimum privileges that require to be assigned to users who are going to use this connector and run actions on Fortinet FortiManager are:
 
-<ul>
-    <li>Admin Profile - Super User</li>
-    <li>JSON API Access - Read & Write</li>
-</ul>
+-   Admin Profile - Super User
+-   JSON API Access - Read & Write
 
-<h2>Configuring the connector</h2>
+## Configuring the connector
 
-<p>For the procedure to configure a connector, click <a href="https://docs.fortinet.com/document/fortisoar/0.0.0/configuring-a-connector/1/configuring-a-connector" rel="noreferrer noopener" target="_blank">here</a>.</p>
+For the procedure to configure a connector, click [here](https://docs.fortinet.com/document/fortisoar/0.0.0/configuring-a-connector/1/configuring-a-connector).
 
-<h3>Configuration parameters</h3>
+### Configuration parameters
 
-<p>In FortiSOAR&trade;, on the Connectors page, click the <strong>Fortinet FortiManager</strong> connector row (if you are in the <strong>Grid</strong> view on the Connectors page), and in the <strong>Configurations</strong> tab enter the required configuration details.</p>
+In FortiSOAR, on the Connectors page, click the **Fortinet FortiManager** connector row (if you are in the **Grid** view on the Connectors page), and in the **Configurations** tab enter the required configuration details.
 
 <table border="1">
     <thead>
@@ -120,11 +113,11 @@ The following changes have been made to the Fortinet FortiManager Connector in v
     </tbody>
 </table>
 
-<h2>Actions supported by the connector</h2>
+## Actions supported by the connector
 
-<p>The following automated operations can be included in playbooks and you can also use the annotations to access operations:</p>
+The following automated operations can be included in playbooks and you can also use the annotations to access operations:
 
-<p>Review the section <a href="#FMG_unsupported_actions">Unsupported Actions</a> for the list of actions not supported by FortiManager Cloud.</p>
+Review the section <a href="#unsupported-actions">Unsupported Actions</a> for the list of actions not supported by FortiManager Cloud.
 
 <table border="1">
     <thead>
@@ -538,7 +531,7 @@ The following changes have been made to the Fortinet FortiManager Connector in v
     </tbody>
 </table>
 
-<h2><a name="FMG_unsupported_actions" id="FMG_unsupported_actions"></a>Unsupported Actions</h2>
+## Unsupported Actions
 
 <p>The following actions are not supported in FortiManager Cloud:</p>
 
@@ -557,9 +550,10 @@ The following changes have been made to the Fortinet FortiManager Connector in v
     <li>Assign Global Policy Package</li>
 </ul>
 
-<p><strong>NOTE</strong>: These actions are also required for the Data Ingestion functionality, hence Data Ingestion will not work with Fortinet FortiManager Cloud.</p>
+>[!NOTE]
+>Since these actions are also required for the *Data Ingestion* functionality, hence Data Ingestion will not work with Fortinet FortiManager Cloud.
 
-<h3>operation: Create Incident</h3>
+### operation: Create Incident
 
 #### Input parameters
 
@@ -647,7 +641,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: List Incident</h3>
+### operation: List Incident
 
 #### Input parameters
 
@@ -683,9 +677,9 @@ The output contains the following populated JSON schema:
         <tr>
             <td>Filter</td>
             <td>Specify the query using which to filter incidents being retrieved from Fortinet FortiManager. The query is in the format:
-                <pre>field_name=&quot;field_value&quot;</pre>
+                <pre>field_name="field_value"</pre>
                 For example:
-                <pre>category=&quot;CAT2&quot; and severity=&quot;medium&quot;</pre>
+                <pre>category="CAT2" and severity="medium"</pre>
             </td>
         </tr>
         <tr>
@@ -706,9 +700,9 @@ The output contains the following populated JSON schema:
             <td>Limit</td>
             <td>Specify the maximum number of records that this operation should return. Values supported are:
             <ul>
-                <li><strong>Default:<code>&quot;50&quot;</code></strong></li>
-                <li><strong>Minimum:<code>&quot;1&quot;</code></strong></li>
-                <li><strong>Maximum:<code>&quot;2000&quot;</code></strong></li>
+                <li><strong>Default:<code>"50"</code></strong></li>
+                <li><strong>Minimum:<code>"1"</code></strong></li>
+                <li><strong>Maximum:<code>"2000"</code></strong></li>
             </ul>
         </td>
         </tr>
@@ -716,8 +710,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -838,7 +832,7 @@ This is the default output schema:
 }
 ```
 
-<h3>operation: Get Events Related to Incident</h3>
+### operation: Get Events Related to Incident
 
 #### Input parameters
 
@@ -875,9 +869,9 @@ This is the default output schema:
             <td>Limit</td>
             <td>Specify the maximum number of records that this operation should return. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;50&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;1&quot;</code></strong></li>
-                    <li><strong>Maximum:<code>&quot;2000&quot;</code></strong></li>
+                    <li><strong>Default:<code>"50"</code></strong></li>
+                    <li><strong>Minimum:<code>"1"</code></strong></li>
+                    <li><strong>Maximum:<code>"2000"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -885,8 +879,8 @@ This is the default output schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -922,7 +916,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Device List</h3>
+### operation: Get Device List
 
 #### Input parameters
 
@@ -1072,7 +1066,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Events</h3>
+### operation: Get Events
 
 #### Input parameters
 
@@ -1114,9 +1108,9 @@ The output contains the following populated JSON schema:
             <td>Limit</td>
             <td>Specify the maximum number of records that this operation should return. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;50&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;1&quot;</code></strong></li>
-                    <li><strong>Maximum:<code>&quot;2000&quot;</code></strong></li>
+                    <li><strong>Default:<code>"50"</code></strong></li>
+                    <li><strong>Minimum:<code>"1"</code></strong></li>
+                    <li><strong>Maximum:<code>"2000"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -1124,8 +1118,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -1175,7 +1169,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Event Details</h3>
+### operation: Get Event Details
 
 #### Input parameters
 
@@ -1194,7 +1188,7 @@ The output contains the following populated JSON schema:
         <tr>
             <td>Alert ID</td>
             <td>Specify the ID of alerts in CSV or list format whose event details (logs) you want to retrieve from Fortinet FortiManager.<br />
-                <strong>Note</strong>: You can find the &quot;Alert IDs&quot; using the &quot;Get Events&quot; action.
+                <strong>Note</strong>: You can find the "Alert IDs" using the "Get Events" action.
             </td>
         </tr>
         <tr>
@@ -1205,9 +1199,9 @@ The output contains the following populated JSON schema:
             <td>Limit</td>
             <td>Specify the maximum number of records that this operation should return. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;50&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;1&quot;</code></strong></li>
-                    <li><strong>Maximum:<code>&quot;2000&quot;</code></strong></li>
+                    <li><strong>Default:<code>"50"</code></strong></li>
+                    <li><strong>Minimum:<code>"1"</code></strong></li>
+                    <li><strong>Maximum:<code>"2000"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -1215,8 +1209,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -1260,7 +1254,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Incident</h3>
+### operation: Update Incident
 
 #### Input parameters
 
@@ -1360,7 +1354,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: List ADOM Policy Package</h3>
+### operation: List ADOM Policy Package
 
 #### Input parameters
 
@@ -1467,7 +1461,7 @@ This is the default output schema:
 }
 ```
 
-<h3>operation: List ADOM Firewall Policies</h3>
+### operation: List ADOM Firewall Policies
 
 #### Input parameters
 
@@ -1668,7 +1662,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: ADOM Level Get Blocked IP Addresses</h3>
+### operation: ADOM Level Get Blocked IP Addresses
 
 #### Input parameters
 
@@ -1707,7 +1701,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group, in the CSV or list format, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group, in the CSV or list format, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
         </tr>
     </tbody>
 </table>
@@ -1731,7 +1725,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: ADOM Level Block IP Address</h3>
+### operation: ADOM Level Block IP Address
 
 #### Input parameters
 
@@ -1770,11 +1764,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
         </tr>
         <tr>
             <td>IP Address</td>
-            <td>Specify the IP addresses that you want to block using Fortinet FortiManager in the CSV or list format. For example, <code>[&quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;] or &quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;</code>.</td>
+            <td>Specify the IP addresses that you want to block using Fortinet FortiManager in the CSV or list format. For example, <code>["1.1.1.1", "2.2.2.2"] or "1.1.1.1", "2.2.2.2"</code>.</td>
         </tr>
     </tbody>
 </table>
@@ -1791,7 +1785,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: ADOM Level Unblock IP Address</h3>
+### operation: ADOM Level Unblock IP Address
 
 #### Input parameters
 
@@ -1830,11 +1824,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
         </tr>
         <tr>
             <td>Address name/IP</td>
-            <td>Specify the IP addresses that you want to unblock using Fortinet FortiManager in the CSV or list format. For example, <code>[&quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;] or &quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;</code>.</td>
+            <td>Specify the IP addresses that you want to unblock using Fortinet FortiManager in the CSV or list format. For example, <code>["1.1.1.1", "2.2.2.2"] or "1.1.1.1", "2.2.2.2"</code>.</td>
         </tr>
     </tbody>
 </table>
@@ -1851,7 +1845,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Re-install Policy</h3>
+### operation: Re-install Policy
 
 #### Input parameters
 
@@ -1868,20 +1862,13 @@ The output contains the following populated JSON schema:
             <td>(Optional) Specify the ADOM name to which you want to apply the firewall policy in Fortinet FortiManager. The ADOM that you specify here overwrites the ADOM that you have specified in the <strong>Connector Configuration</strong> as a configuration parameter.</td>
         </tr>
         <tr>
-            <td>Policy Package Name</td>
-            <td>Select the policy package name to which you want to apply the firewall policy in Fortinet FortiManager. This parameter makes an API call named <code>list_adom_policy_package</code> to dynamically populate its dropdown selection.</td>
-        </tr>
-        <tr>
-            <td>Scopes</td>
-            <td>Specify the device name or device group name on which you want to re-install the policy package.</td>
+            <td>Reinstall Policy Package</td>
+            <td><br><strong>If you choose 'Reinstall Policy Package (Single Target)'</strong><ul><li>Policy Package Name: Select the policy package name to which you want to apply the firewall policy in Fortinet FortiManager. This parameter makes an API call named "list_adom_policy_package" to dynamically populate its dropdown selection.</li><li>Scopes: Specify the device name or device group name on which you want to install the policy package.</li><li>Policy Package/Folder Path: (Optional) Specify the policy package or folder path to apply the firewall policy in Fortinet FortiManager.</li></ul><strong>If you choose 'Reinstall Policy Packages (Multiple Targets)'</strong><ul><li>Target: Specify multiple targets as JSON objects, on which to install the policy package.</li></ul>
+            </td>
         </tr>
         <tr>
             <td>Flags</td>
             <td>(Optional) Specify a comma-separated list of flags on which you want to re-install the policy package.</td>
-        </tr>
-        <tr>
-            <td>Policy Package/Folder Path</td>
-            <td>(Optional) Specify the policy package or folder path to apply the firewall policy in Fortinet FortiManager.</td>
         </tr>
     </tbody>
 </table>
@@ -1909,7 +1896,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: List Global Policy Package</h3>
+### operation: List Global Policy Package
 
 #### Input parameters
 
@@ -2010,7 +1997,7 @@ This is the default output schema:
 }
 ```
 
-<h3>operation: List Global Firewall Policies</h3>
+### operation: List Global Firewall Policies
 
 #### Input parameters
 
@@ -2150,7 +2137,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Global Level Get Blocked IP Addresses</h3>
+### operation: Global Level Get Blocked IP Addresses
 
 #### Input parameters
 
@@ -2180,7 +2167,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group, in the CSV or list format, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group, in the CSV or list format, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
         </tr>
     </tbody>
 </table>
@@ -2204,7 +2191,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Global Level Block IP Address</h3>
+### operation: Global Level Block IP Address
 
 #### Input parameters
 
@@ -2234,11 +2221,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs or applications in Fortinet FortiManager</a> section.</td>
         </tr>
         <tr>
             <td>IP Address</td>
-            <td>Specify the IP addresses that you want to block using Fortinet FortiManager in the CSV or list format.For example, <code>[&quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;] or &quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;</code>.</td>
+            <td>Specify the IP addresses that you want to block using Fortinet FortiManager in the CSV or list format.For example, <code>["1.1.1.1", "2.2.2.2"] or "1.1.1.1", "2.2.2.2"</code>.</td>
         </tr>
     </tbody>
 </table>
@@ -2255,7 +2242,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Global Level Unblock IP Address</h3>
+### operation: Global Level Unblock IP Address
 
 #### Input parameters
 
@@ -2285,11 +2272,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Address Group Name</td>
-            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
+            <td>Specify the name of the IP address group, that you have specified in Fortinet FortiManager for blocking or unblocking IP addresses. For more information, see the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</td>
         </tr>
         <tr>
             <td>Address name/IP</td>
-            <td>Specify the IP addresses that you want to unblock using Fortinet FortiManager in the CSV or list format.For example, <code>[&quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;] or &quot;1.1.1.1&quot;, &quot;2.2.2.2&quot;</code>.</td>
+            <td>Specify the IP addresses that you want to unblock using Fortinet FortiManager in the CSV or list format.For example, <code>["1.1.1.1", "2.2.2.2"] or "1.1.1.1", "2.2.2.2"</code>.</td>
         </tr>
     </tbody>
 </table>
@@ -2306,7 +2293,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Assign Global Policy Package</h3>
+### operation: Assign Global Policy Package
 
 #### Input parameters
 
@@ -2361,7 +2348,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Device Groups List</h3>
+### operation: Get Device Groups List
 
 #### Input parameters
 
@@ -2397,11 +2384,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[ &quot;desc&quot;, &quot;name&quot;, &quot;os_type&quot;, &quot;type&quot;]</code>. If attributes are not specified, then all attributes are returned.</td>
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[ "desc", "name", "os_type", "type"]</code>. If attributes are not specified, then all attributes are returned.</td>
         </tr>
         <tr>
             <td>Filter By</td>
-            <td>(Optional) Specify attributes to filter the results according to a set criteria. Attributes are <code>desc</code>, <code>name</code>, <code>os_type</code>, and <code>type</code>. For example, <code>[[&quot;name&quot;, &quot;==&quot;, &quot;All_FortiADC&quot;],[ &quot;os_type&quot;, &quot;==&quot;, 9]]</code>.</td>
+            <td>(Optional) Specify attributes to filter the results according to a set criteria. Attributes are <code>desc</code>, <code>name</code>, <code>os_type</code>, and <code>type</code>. For example, <code>[["name", "==", "All_FortiADC"],[ "os_type", "==", 9]]</code>.</td>
         </tr>
         <tr>
             <td>Limit</td>
@@ -2411,8 +2398,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -2462,7 +2449,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Address</h3>
+### operation: Create Address
 
 #### Input parameters
 
@@ -2523,7 +2510,7 @@ The output contains the following populated JSON schema:
                                         </ul>
                                     </li>
                                     <li><strong>MAC List</strong>: Specify a CSV or a list of MAC addresses being created, in the <strong>MAC Address</strong> field. For example:
-                                        <pre>[&quot;00:15:00:e8:27:25&quot;,&quot;00:15:00:e8:27:26&quot;,]</pre>
+                                        <pre>["00:15:00:e8:27:25","00:15:00:e8:27:26",]</pre>
                                     </li>
                                 </ul>
                             </li>
@@ -2542,7 +2529,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Address Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the address. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the address. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -2570,7 +2557,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Addresses List</h3>
+### operation: Get Addresses List
 
 #### Input parameters
 
@@ -2606,7 +2593,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>&nbsp;[ &quot;_image-base64&quot;, &quot;allow-routing&quot;, &quot;associated-interface&quot;, &quot;cache-ttl&quot;, &quot;clearpass-spt&quot;, &quot;color&quot;, &quot;comment&quot;, &quot;country&quot;, &quot;end-ip&quot;, &quot;epg-name&quot;, &quot;fabric-object&quot;, &quot;filter&quot;, &quot;fqdn&quot;, &quot;fsso-group&quot;, &quot;interface&quot;, &quot;macaddr&quot;, &quot;name&quot;, &quot;node-ip-only&quot;, &quot;obj-id&quot;, &quot;obj-tag&quot;, &quot;obj-type&quot;, &quot;organization&quot;, &quot;policy-group&quot;, &quot;sdn&quot;, &quot;sdn-addr-type&quot;, &quot;sdn-tag&quot;, &quot;start-ip&quot;, &quot;sub-type&quot;, &quot;subnet&quot;, &quot;subnet-name&quot;, &quot;tenant&quot;, &quot;type&quot;, &quot;uuid&quot;, &quot;wildcard&quot;, &quot;wildcard-fqdn&quot;]&nbsp;</code>
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>&nbsp;[ "_image-base64", "allow-routing", "associated-interface", "cache-ttl", "clearpass-spt", "color", "comment", "country", "end-ip", "epg-name", "fabric-object", "filter", "fqdn", "fsso-group", "interface", "macaddr", "name", "node-ip-only", "obj-id", "obj-tag", "obj-type", "organization", "policy-group", "sdn", "sdn-addr-type", "sdn-tag", "start-ip", "sub-type", "subnet", "subnet-name", "tenant", "type", "uuid", "wildcard", "wildcard-fqdn"]&nbsp;</code>
                 <p><strong>Note</strong>: If attributes are not specified, then all attributes will be returned.</p>
             </td>
         </tr>
@@ -2622,8 +2609,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -2693,7 +2680,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Address</h3>
+### operation: Update Address
 
 #### Input parameters
 
@@ -2754,7 +2741,7 @@ The output contains the following populated JSON schema:
                                         </ul>
                                     </li>
                                     <li><strong>MAC List</strong>: Specify a CSV or a list of MAC addresses being updated, in the <strong>MAC Address</strong> field. For example:
-                                        <pre>[&quot;00:15:00:e8:27:25&quot;,&quot;00:15:00:e8:27:26&quot;,]</pre>
+                                        <pre>["00:15:00:e8:27:25","00:15:00:e8:27:26",]</pre>
                                     </li>
                                 </ul>
                             </li>
@@ -2773,7 +2760,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Address Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the address. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>.</td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the address. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>.</td>
         </tr>
     </tbody>
 </table>
@@ -2801,7 +2788,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Address</h3>
+### operation: Delete Address
 
 #### Input parameters
 
@@ -2854,7 +2841,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Address Group</h3>
+### operation: Create Address Group
 
 #### Input parameters
 
@@ -2908,7 +2895,7 @@ The output contains the following populated JSON schema:
         <tr>
             <td>Additional Address Group Arguments</td>
             <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the address group. You can enter the arguments in the following format:
-                <pre>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</pre>
+                <pre>{"field1":value1, "field2":value2}</pre>
             </td>
         </tr>
     </tbody>
@@ -2937,7 +2924,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Address Groups List</h3>
+### operation: Get Address Groups List
 
 #### Input parameters
 
@@ -2973,7 +2960,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>[ &quot;_image-base64&quot;, &quot;allow-routing&quot;, &quot;associated-interface&quot;, &quot;cache-ttl&quot;, &quot;clearpass-spt&quot;, &quot;color&quot;, &quot;comment&quot;, &quot;country&quot;, &quot;end-ip&quot;, &quot;epg-name&quot;, &quot;fabric-object&quot;, &quot;filter&quot;, &quot;fqdn&quot;, &quot;fsso-group&quot;, &quot;interface&quot;, &quot;macaddr&quot;, &quot;name&quot;, &quot;node-ip-only&quot;, &quot;obj-id&quot;, &quot;obj-tag&quot;, &quot;obj-type&quot;, &quot;organization&quot;, &quot;policy-group&quot;, &quot;sdn&quot;, &quot;sdn-addr-type&quot;, &quot;sdn-tag&quot;, &quot;start-ip&quot;, &quot;sub-type&quot;, &quot;subnet&quot;, &quot;subnet-name&quot;, &quot;tenant&quot;, &quot;type&quot;, &quot;uuid&quot;, &quot;wildcard&quot;, &quot;wildcard-fqdn&quot;]</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>[ "_image-base64", "allow-routing", "associated-interface", "cache-ttl", "clearpass-spt", "color", "comment", "country", "end-ip", "epg-name", "fabric-object", "filter", "fqdn", "fsso-group", "interface", "macaddr", "name", "node-ip-only", "obj-id", "obj-tag", "obj-type", "organization", "policy-group", "sdn", "sdn-addr-type", "sdn-tag", "start-ip", "sub-type", "subnet", "subnet-name", "tenant", "type", "uuid", "wildcard", "wildcard-fqdn"]</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -2989,8 +2976,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -3049,7 +3036,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Address Group</h3>
+### operation: Update Address Group
 
 #### Input parameters
 
@@ -3103,7 +3090,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Address Group Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the address group. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the address group. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -3131,7 +3118,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Address Group</h3>
+### operation: Delete Address Group
 
 #### Input parameters
 
@@ -3184,7 +3171,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Service Categories List</h3>
+### operation: Get Service Categories List
 
 #### Input parameters
 
@@ -3220,7 +3207,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>[&quot;comment&quot;, &quot;fabric-object&quot;, &quot;name&quot;]</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example,<code>["comment", "fabric-object", "name"]</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -3236,8 +3223,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -3288,7 +3275,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Service Group</h3>
+### operation: Create Service Group
 
 #### Input parameters
 
@@ -3332,7 +3319,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Service Group Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the service group. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the service group. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -3360,7 +3347,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Service Groups List</h3>
+### operation: Get Service Groups List
 
 #### Input parameters
 
@@ -3396,7 +3383,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[&quot;color&quot;, &quot;comment&quot;, &quot;fabric-objec&quot;t, &quot;member&quot;, &quot;name&quot;, &quot;proxy&quot;]&nbsp;</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>["color", "comment", "fabric-objec"t, "member", "name", "proxy"]&nbsp;</code><br />
                 <strong>NOTE</strong>: If attributes are not specified, then all attributes are returned.
             </td>
         </tr>
@@ -3412,8 +3399,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -3465,7 +3452,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Service Group</h3>
+### operation: Update Service Group
 
 #### Input parameters
 
@@ -3514,7 +3501,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Service Group Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added while updating the service group. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added while updating the service group. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -3542,7 +3529,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Service Group</h3>
+### operation: Delete Service Group
 
 #### Input parameters
 
@@ -3595,7 +3582,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Custom Service</h3>
+### operation: Create Custom Service
 
 #### Input parameters
 
@@ -3748,7 +3735,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Custom Service Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the custom service. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the custom service. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -3776,7 +3763,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Custom Services List</h3>
+### operation: Get Custom Services List
 
 #### Input parameters
 
@@ -3812,7 +3799,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[&quot;app-category&quot;, &quot;app-service-type&quot;, &quot;application&quot;, &quot;category&quot;, &quot;check-reset-range&quot;, &quot;color&quot;, &quot;comment&quot;, &quot;fabric-object&quot;, &quot;fqdn&quot;, &quot;helper&quot;, &quot;icmpcode&quot;, &quot;icmptype&quot;, &quot;iprange&quot;, &quot;name&quot;, &quot;protocol&quot;, &quot;protocol-number&quot;, &quot;proxy&quot;, &quot;sctp-portrange&quot;, &quot;session-ttl&quot;, &quot;tcp-halfclose-timer&quot;, &quot;tcp-halfopen-timer&quot;, &quot;tcp-portrange&quot;, &quot;tcp-rst-timer&quot;, &quot;tcp-timewait-timer&quot;, &quot;udp-idle-timer&quot;, &quot;udp-portrange&quot;, &quot;visibility&quot;]&nbsp;</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>["app-category", "app-service-type", "application", "category", "check-reset-range", "color", "comment", "fabric-object", "fqdn", "helper", "icmpcode", "icmptype", "iprange", "name", "protocol", "protocol-number", "proxy", "sctp-portrange", "session-ttl", "tcp-halfclose-timer", "tcp-halfopen-timer", "tcp-portrange", "tcp-rst-timer", "tcp-timewait-timer", "udp-idle-timer", "udp-portrange", "visibility"]&nbsp;</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -3828,8 +3815,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -3901,7 +3888,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Custom Service</h3>
+### operation: Update Custom Service
 
 #### Input parameters
 
@@ -4054,7 +4041,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Custom Service Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the custom service. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the custom service. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -4082,7 +4069,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Custom Service</h3>
+### operation: Delete Custom Service
 
 #### Input parameters
 
@@ -4135,7 +4122,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Policy Package</h3>
+### operation: Create Policy Package
 
 #### Input parameters
 
@@ -4195,7 +4182,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Policy Package Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the policy package. You can enter the arguments in the following format:<code> {&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the policy package. You can enter the arguments in the following format:<code> {"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -4220,7 +4207,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Policy Package</h3>
+### operation: Update Policy Package
 
 #### Input parameters
 
@@ -4288,7 +4275,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Policy Package Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the policy package. You can enter the arguments in the following format:<code> {&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the policy package. You can enter the arguments in the following format:<code> {"field1":value1, "field2":value2}</code></td>
         </tr>
     </tbody>
 </table>
@@ -4313,7 +4300,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Policy Package</h3>
+### operation: Delete Policy Package
 
 #### Input parameters
 
@@ -4370,7 +4357,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create Firewall Policy</h3>
+### operation: Create Firewall Policy
 
 #### Input parameters
 
@@ -4493,8 +4480,8 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Policy Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the firewall policy. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>.<br />
-                For example,<code>{&quot;logtraffic-start&quot;: &quot;disable&quot;, &quot;radius-mac-auth-bypass&quot;: &quot;disable&quot;, &quot;profile-type&quot;: &quot;single&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the firewall policy. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>.<br />
+                For example,<code>{"logtraffic-start": "disable", "radius-mac-auth-bypass": "disable", "profile-type": "single" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -4522,7 +4509,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update Firewall Policy</h3>
+### operation: Update Firewall Policy
 
 #### Input parameters
 
@@ -4628,7 +4615,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional Policy Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the firewall policy. You can enter the arguments in the following format:&nbsp;<code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;radius-mac-auth-bypass&quot;: &quot;disable&quot;, &quot;profile-type&quot;: &quot;single&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the firewall policy. You can enter the arguments in the following format:&nbsp;<code>{"field1":value1, "field2":value2}</code>. For example, <code>{"radius-mac-auth-bypass": "disable", "profile-type": "single" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -4656,7 +4643,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete Firewall Policy</h3>
+### operation: Delete Firewall Policy
 
 #### Input parameters
 
@@ -4697,7 +4684,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Policy ID</td>
-            <td>Specify the ID of the firewall policy that you want to delete from Fortinet FortiManager. You can get the policy ID from &quot;List Global Firewall Policies&quot; or &quot;List ADOM Firewall Policies&quot; actions.</td>
+            <td>Specify the ID of the firewall policy that you want to delete from Fortinet FortiManager. You can get the policy ID from "List Global Firewall Policies" or "List ADOM Firewall Policies" actions.</td>
         </tr>
     </tbody>
 </table>
@@ -4722,7 +4709,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Move Firewall Policy</h3>
+### operation: Move Firewall Policy
 
 #### Input parameters
 
@@ -4763,7 +4750,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Policy ID</td>
-            <td>Specify the ID of the firewall policy that you want to move in Fortinet FortiManager. You can get the policy ID from &quot;List Global Firewall Policies&quot; or &quot;List ADOM Firewall Policies&quot; actions.</td>
+            <td>Specify the ID of the firewall policy that you want to move in Fortinet FortiManager. You can get the policy ID from "List Global Firewall Policies" or "List ADOM Firewall Policies" actions.</td>
         </tr>
         <tr>
             <td>Target</td>
@@ -4799,7 +4786,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Dynamic Interface List</h3>
+### operation: Get Dynamic Interface List
 
 #### Input parameters
 
@@ -4831,7 +4818,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[&quot;color&quot;, &quot;default-mapping&quot;, &quot;defmap-intf&quot;, &quot;defmap-intrazone-deny&quot;, &quot;defmap-zonemember&quot;, &quot;description&quot;, &quot;egress-shaping-profile&quot;, &quot;name&quot;, &quot;single-intf&quot;, &quot;wildcard&quot;, &quot;wildcard-intf&quot;]</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>["color", "default-mapping", "defmap-intf", "defmap-intrazone-deny", "defmap-zonemember", "description", "egress-shaping-profile", "name", "single-intf", "wildcard", "wildcard-intf"]</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -4847,8 +4834,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -4916,7 +4903,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Install Policy</h3>
+### operation: Install Policy
 
 #### Input parameters
 
@@ -4939,6 +4926,10 @@ The output contains the following populated JSON schema:
         <tr>
             <td>Scopes</td>
             <td>Specify the device name or device group name on which you want to install the policy package.</td>
+        </tr>
+        <tr>
+            <td>Policy Package/Folder Path</td>
+            <td>(Optional) Specify the policy package or folder path to apply the firewall policy in Fortinet FortiManager.</td>
         </tr>
         <tr>
             <td>Flags</td>
@@ -4982,7 +4973,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Installation Policy Package Status</h3>
+### operation: Get Installation Policy Package Status
 
 #### Input parameters
 
@@ -4996,7 +4987,7 @@ The output contains the following populated JSON schema:
     <tbody>
         <tr>
             <td>Task ID</td>
-            <td>Specify the ID of the task whose policy package installation status you want to retrieve from Fortinet FortiManager. You get the task ID using the &quot;Install Policy&quot; action.</td>
+            <td>Specify the ID of the task whose policy package installation status you want to retrieve from Fortinet FortiManager. You get the task ID using the "Install Policy" action.</td>
         </tr>
     </tbody>
 </table>
@@ -5063,7 +5054,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create LDAP Server</h3>
+### operation: Create LDAP Server
 
 #### Input parameters
 
@@ -5134,7 +5125,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional LDAP Server Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the LDAP server. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;account-key-filter&quot;: &quot;string&quot;, &quot;group-filter&quot;: &quot;string&quot;, &quot;ssl-min-proto-version&quot;: &quot;default&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the LDAP server. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>. For example, <code>{"account-key-filter": "string", "group-filter": "string", "ssl-min-proto-version": "default" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -5162,7 +5153,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get LDAP Server List</h3>
+### operation: Get LDAP Server List
 
 #### Input parameters
 
@@ -5194,7 +5185,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[ &quot;account-key-filter&quot;, &quot;account-key-processing&quot;, &quot;antiphish&quot;, &quot;ca-cert&quot;, &quot;cnid&quot;, &quot;dn&quot;, &quot;group-filter&quot;, &quot;group-member-check&quot;, &quot;group-object-filter&quot;, &quot;group-search-base&quot;, &quot;interface&quot;, &quot;interface-select-method&quot;, &quot;member-attr&quot;, &quot;name&quot;, &quot;obtain-user-info&quot;, &quot;password&quot;, &quot;password-attr&quot;, &quot;password-expiry-warning&quot;, &quot;password-renewal&quot;, &quot;port&quot;, &quot;search-type&quot;, &quot;secondary-server&quot;, &quot;secure&quot;, &quot;server&quot;, &quot;server-identity-check&quot;, &quot;source-ip&quot;, &quot;source-port&quot;, &quot;ssl-min-proto-version&quot;, &quot;tertiary-server&quot;, &quot;two-factor&quot;, &quot;two-factor-authentication&quot;, &quot;two-factor-notification&quot;, &quot;type&quot;, &quot;user-info-exchange-server&quot;, &quot;username&quot; ]</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[ "account-key-filter", "account-key-processing", "antiphish", "ca-cert", "cnid", "dn", "group-filter", "group-member-check", "group-object-filter", "group-search-base", "interface", "interface-select-method", "member-attr", "name", "obtain-user-info", "password", "password-attr", "password-expiry-warning", "password-renewal", "port", "search-type", "secondary-server", "secure", "server", "server-identity-check", "source-ip", "source-port", "ssl-min-proto-version", "tertiary-server", "two-factor", "two-factor-authentication", "two-factor-notification", "type", "user-info-exchange-server", "username" ]</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -5210,8 +5201,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -5288,7 +5279,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update LDAP Server</h3>
+### operation: Update LDAP Server
 
 #### Input parameters
 
@@ -5359,7 +5350,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional LDAP Server Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the LDAP server. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;account-key-filter&quot;: &quot;string&quot;, &quot;group-filter&quot;: &quot;string&quot;, &quot;ssl-min-proto-version&quot;: &quot;default&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the LDAP server. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>. For example, <code>{"account-key-filter": "string", "group-filter": "string", "ssl-min-proto-version": "default" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -5387,7 +5378,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete LDAP Server</h3>
+### operation: Delete LDAP Server
 
 #### Input parameters
 
@@ -5435,7 +5426,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Create User Group</h3>
+### operation: Create User Group
 
 #### Input parameters
 
@@ -5466,7 +5457,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional User Group Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the user group. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;account-key-filter&quot;: &quot;string&quot;, &quot;group-filter&quot;: &quot;string&quot;, &quot;ssl-min-proto-version&quot;: &quot;default&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the creation of the user group. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>. For example, <code>{"account-key-filter": "string", "group-filter": "string", "ssl-min-proto-version": "default" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -5494,7 +5485,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get User Groups List</h3>
+### operation: Get User Groups List
 
 #### Input parameters
 
@@ -5526,7 +5517,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[&quot;auth-concurrent-override&quot;,&quot;auth-concurrent-value&quot;,&quot;authtimeout&quot;,&quot;company&quot;,&quot;email&quot;,&quot;expire&quot;,&quot;expire-type&quot;,&quot;group-type&quot;,&quot;http-digest-realm&quot;,&quot;id&quot;,&quot;max-accounts&quot;,&quot;member&quot;,&quot;mobile-phone&quot;,&quot;multiple-guest-add&quot;,&quot;name&quot;,&quot;password&quot;,&quot;sms-custom-server&quot;,&quot;sms-server&quot;,&quot;sponsor&quot;,&quot;sso-attribute-value&quot;,&quot;user-id&quot;,&quot;user-name&quot;]&nbsp;</code><br />
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>["auth-concurrent-override","auth-concurrent-value","authtimeout","company","email","expire","expire-type","group-type","http-digest-realm","id","max-accounts","member","mobile-phone","multiple-guest-add","name","password","sms-custom-server","sms-server","sponsor","sso-attribute-value","user-id","user-name"]&nbsp;</code><br />
                 <strong>Note</strong>: If attributes are not specified, then all attributes will be returned.
             </td>
         </tr>
@@ -5542,8 +5533,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -5601,7 +5592,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update User Group</h3>
+### operation: Update User Group
 
 #### Input parameters
 
@@ -5637,7 +5628,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional User Group Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the user group. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;sponsor&quot;: &quot;optional&quot;, &quot;sms-server&quot;: &quot;string&quot;, &quot;ssl-min-proto-version&quot;: &quot;default&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updation of the user group. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>. For example, <code>{"sponsor": "optional", "sms-server": "string", "ssl-min-proto-version": "default" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -5665,7 +5656,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Delete User Group</h3>
+### operation: Delete User Group
 
 #### Input parameters
 
@@ -5713,7 +5704,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get SSL VPN Settings</h3>
+### operation: Get SSL VPN Settings
 
 #### Input parameters
 
@@ -5854,7 +5845,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Update SSL VPN Settings</h3>
+### operation: Update SSL VPN Settings
 
 #### Input parameters
 
@@ -5934,7 +5925,7 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Additional SSL VPN Settings Arguments</td>
-            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updating of the SSL VPN settings. You can enter the arguments in the following format: <code>{&quot;field1&quot;:value1, &quot;field2&quot;:value2}</code>. For example, <code>{&quot;tunnel-ip-pools&quot;: &quot;SSLVPN_TUNNEL_ADDR1&quot;, &quot;sms-server&quot;: &quot;string&quot;, &quot;ssl-min-proto-version&quot;: &quot;default&quot; }</code></td>
+            <td>(Optional) Specify additional arguments, in JSON format, to be added during the updating of the SSL VPN settings. You can enter the arguments in the following format: <code>{"field1":value1, "field2":value2}</code>. For example, <code>{"tunnel-ip-pools": "SSLVPN_TUNNEL_ADDR1", "sms-server": "string", "ssl-min-proto-version": "default" }</code></td>
         </tr>
     </tbody>
 </table>
@@ -5959,7 +5950,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Web Filter List</h3>
+### operation: Get Web Filter List
 
 #### Input parameters
 
@@ -5991,11 +5982,11 @@ The output contains the following populated JSON schema:
         </tr>
         <tr>
             <td>Attributes in Result</td>
-            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>[&quot;comment&quot;, &quot;extended-log&quot;, &quot;feature-set&quot;, &quot;https-replacemsg&quot;, &quot;log-all-url&quot;, &quot;name&quot;, &quot;options&quot;, &quot;ovrd-perm&quot;, &quot;post-action&quot;, &quot;replacemsg-group&quot;, &quot;web-antiphishing-log&quot;, &quot;web-content-log&quot;, &quot;web-extended-all-action-log&quot;, &quot;web-filter-activex-log&quot;, &quot;web-filter-applet-log&quot;, &quot;web-filter-command-block-log&quot;, &quot;web-filter-cookie-log&quot;, &quot;web-filter-cookie-removal-log&quot;, &quot;web-filter-js-log&quot;, &quot;web-filter-jscript-log&quot;, &quot;web-filter-referer-log&quot;, &quot;web-filter-unknown-log&quot;, &quot;web-filter-vbs-log&quot;, &quot;web-ftgd-err-log&quot;, &quot;web-ftgd-quota-usage&quot;, &quot;web-invalid-domain-log&quot;, &quot;web-url-log&quot;, &quot;wisp&quot;, &quot;wisp-algorithm&quot;, &quot;wisp-servers&quot;]</code>. If attributes are not specified, then all attributes will be returned.</td>
+            <td>(Optional) Specify a string array to limit the output by returning only the specified attributes. For example, <code>["comment", "extended-log", "feature-set", "https-replacemsg", "log-all-url", "name", "options", "ovrd-perm", "post-action", "replacemsg-group", "web-antiphishing-log", "web-content-log", "web-extended-all-action-log", "web-filter-activex-log", "web-filter-applet-log", "web-filter-command-block-log", "web-filter-cookie-log", "web-filter-cookie-removal-log", "web-filter-js-log", "web-filter-jscript-log", "web-filter-referer-log", "web-filter-unknown-log", "web-filter-vbs-log", "web-ftgd-err-log", "web-ftgd-quota-usage", "web-invalid-domain-log", "web-url-log", "wisp", "wisp-algorithm", "wisp-servers"]</code>. If attributes are not specified, then all attributes will be returned.</td>
         </tr>
         <tr>
             <td>Filter By</td>
-            <td>(Optional) You can filter the result according to a set of criteria by specifying attributes in the format <code>[[&quot;&quot;, &quot;==&quot;, &quot;&quot;]]</code></td>
+            <td>(Optional) You can filter the result according to a set of criteria by specifying attributes in the format <code>[["", "==", ""]]</code></td>
         </tr>
         <tr>
             <td>Limit</td>
@@ -6005,8 +5996,8 @@ The output contains the following populated JSON schema:
             <td>Offset</td>
             <td>(Optional) Specify the offset value to retrieve a subset of records that starts from the offset value. The offset works with the <em>Limit</em> parameter, which determines how many records to retrieve starting from the offset. Values supported are:
                 <ul>
-                    <li><strong>Default:<code>&quot;0&quot;</code></strong></li>
-                    <li><strong>Minimum:<code>&quot;0&quot;</code></strong></li>
+                    <li><strong>Default:<code>"0"</code></strong></li>
+                    <li><strong>Minimum:<code>"0"</code></strong></li>
                 </ul>
             </td>
         </tr>
@@ -6014,8 +6005,8 @@ The output contains the following populated JSON schema:
             <td>Sort By</td>
             <td>Sort the web filters by a field and order the results. You can select to either sort the results by fields, or can order the results, or both.
                 <ul>
-                    <li>If you select &quot;Field&quot;, then in the <strong>Field</strong> field specify the name of the field on which you want to sort the result. Fields based on which you can sort are <code>account-key-filter, account-key-processing, antiphish, ca-cert, cnid, dn, group-filter, group-member-check, group-object-filter, group-search-base, interface, interface-select-method, member-attr, name, obtain-user-info, password, password-attr, password-expiry-warning, password-renewal, port, search-type, secondary-server, secure, server, server-identity-check, source-ip, source-port, ssl-min-proto-version, tertiary-server, two-factor, two-factor-authentication, two-factor-notification, type, user-info-exchange-server, username</code>.</li>
-                    <li>If you select &quot;Order&quot;, then from the <strong>Order</strong> field, select the order in which you want to sort the result. You can select between <strong>Ascending</strong> or <strong>Descending</strong>. By default, this is set to <strong>Ascending</strong>.</li>
+                    <li>If you select "Field", then in the <strong>Field</strong> field specify the name of the field on which you want to sort the result. Fields based on which you can sort are <code>account-key-filter, account-key-processing, antiphish, ca-cert, cnid, dn, group-filter, group-member-check, group-object-filter, group-search-base, interface, interface-select-method, member-attr, name, obtain-user-info, password, password-attr, password-expiry-warning, password-renewal, port, search-type, secondary-server, secure, server, server-identity-check, source-ip, source-port, ssl-min-proto-version, tertiary-server, two-factor, two-factor-authentication, two-factor-notification, type, user-info-exchange-server, username</code>.</li>
+                    <li>If you select "Order", then from the <strong>Order</strong> field, select the order in which you want to sort the result. You can select between <strong>Ascending</strong> or <strong>Descending</strong>. By default, this is set to <strong>Ascending</strong>.</li>
                 </ul>
             </td>
         </tr>
@@ -6126,7 +6117,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Blocked URLs</h3>
+### operation: Get Blocked URLs
 
 #### Input parameters
 
@@ -6144,11 +6135,11 @@ The output contains the following populated JSON schema:
                 If you select 'ADOM', then you can specify the following parameters:
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
                 </ul>
             </td>
         </tr>
@@ -6179,7 +6170,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Block URL</h3>
+### operation: Block URL
 
 #### Input parameters
 
@@ -6197,13 +6188,13 @@ The output contains the following populated JSON schema:
                 If you select 'ADOM', then you can specify the following parameters:
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>URL: List of URLs that you want to block on Fortinet FortiManager. Specify the URLs in the list format, if you want to block more than one URL. For example, for a list of URLs, enter: <code>[&quot;URL1&quot;, &quot;URL2&quot;]</code> in this field. For a single URL enter: <code>example.com</code></li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>URL: List of URLs that you want to block on Fortinet FortiManager. Specify the URLs in the list format, if you want to block more than one URL. For example, for a list of URLs, enter: <code>["URL1", "URL2"]</code> in this field. For a single URL enter: <code>example.com</code></li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>URL: List of URLs that you want to block on Fortinet FortiManager. Specify the URLs in the list format, if you want to block more than one URL. For example, for a list of URLs, enter: <code>[&quot;URL1&quot;, &quot;URL2&quot;]</code> in this field. For a single URL enter: <code>example.com</code></li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>URL: List of URLs that you want to block on Fortinet FortiManager. Specify the URLs in the list format, if you want to block more than one URL. For example, for a list of URLs, enter: <code>["URL1", "URL2"]</code> in this field. For a single URL enter: <code>example.com</code></li>
                 </ul>
             </td>
         </tr>
@@ -6221,7 +6212,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Unblock URL</h3>
+### operation: Unblock URL
 
 #### Input parameters
 
@@ -6239,13 +6230,13 @@ The output contains the following populated JSON schema:
                 If you select 'ADOM', then you can specify the following parameters:
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>URL: List of URLs that you want to unblock on Fortinet FortiManager. Specify the URLs in the list format, if you want to unblock more than one URL. For example, for a list of URLs, enter: <code>[&quot;URL1&quot;, &quot;URL2&quot;]</code> in this field. For a single URL enter: <code>example.com</code></li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>URL: List of URLs that you want to unblock on Fortinet FortiManager. Specify the URLs in the list format, if you want to unblock more than one URL. For example, for a list of URLs, enter: <code>["URL1", "URL2"]</code> in this field. For a single URL enter: <code>example.com</code></li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>URL: List of URLs that you want to unblock on Fortinet FortiManager. Specify the URLs in the list format, if you want to unblock more than one URL. For example, for a list of URLs, enter: <code>[&quot;URL1&quot;, &quot;URL2&quot;]</code> in this field. For a single URL enter: <code>example.com</code></li>
+                    <li>Web Filter Profile Name: Valid web filter profile name that you have specified in Fortinet FortiManager for blocking or unblocking URLs. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>URL: List of URLs that you want to unblock on Fortinet FortiManager. Specify the URLs in the list format, if you want to unblock more than one URL. For example, for a list of URLs, enter: <code>["URL1", "URL2"]</code> in this field. For a single URL enter: <code>example.com</code></li>
                 </ul>
             </td>
         </tr>
@@ -6263,7 +6254,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Applications Detail</h3>
+### operation: Get Applications Detail
 
 #### Input parameters
 
@@ -6312,7 +6303,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Applications Control List</h3>
+### operation: Get Applications Control List
 
 #### Input parameters
 
@@ -6417,7 +6408,7 @@ The output contains the following populated JSON schema:
 }
 ```
 
-<h3>operation: Get Blocked Applications</h3>
+### operation: Get Blocked Applications
 
 #### Input parameters
 
@@ -6435,11 +6426,11 @@ The output contains the following populated JSON schema:
                 <br><strong>If you select 'ADOM'</strong>
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
                 </ul>
             </td>
         </tr>
@@ -6475,7 +6466,7 @@ The output contains the following populated JSON schema:
 ]
 ```
 
-<h3>operation: Block Application</h3>
+### operation: Block Application
 
 #### Input parameters
 
@@ -6493,13 +6484,13 @@ The output contains the following populated JSON schema:
                 If you select 'ADOM', then you can specify the following parameters:
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>Application Names: List of application names that you want to block on Fortinet FortiManager. Specify the application names in the list format, if you want to block more than one application. For example, for a list of applications, enter: <code>[&quot;Application_Name1&quot;, &quot;Application_Name2&quot;]</code> in this field. For a single application enter: <code>Application_Name</code></li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Names: List of application names that you want to block on Fortinet FortiManager. Specify the application names in the list format, if you want to block more than one application. For example, for a list of applications, enter: <code>["Application_Name1", "Application_Name2"]</code> in this field. For a single application enter: <code>Application_Name</code></li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>Application Names: List of application names that you want to block on Fortinet FortiManager. Specify the application names in the list format, if you want to block more than one application. For example, for a list of applications, enter: <code>[&quot;Application_Name1&quot;, &quot;Application_Name2&quot;]</code> in this field. For a single application enter: <code>Application_Name</code></li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Names: List of application names that you want to block on Fortinet FortiManager. Specify the application names in the list format, if you want to block more than one application. For example, for a list of applications, enter: <code>["Application_Name1", "Application_Name2"]</code> in this field. For a single application enter: <code>Application_Name</code></li>
                 </ul>
             </td>
         </tr>
@@ -6520,7 +6511,7 @@ The output contains the following populated JSON schema:
 ]
 ```
 
-<h3>operation: Unblock Application</h3>
+### operation: Unblock Application
 
 #### Input parameters
 
@@ -6538,13 +6529,13 @@ The output contains the following populated JSON schema:
                 <br><strong>If you select 'ADOM'</strong>
                 <ul>
                     <li>ADOM: Administrative domain name (ADOM) of the Fortinet FortiManager server to which you will connect and perform the automated operations. The ADOM that you specify here overwrites the ADOM that you have specified as a configuration parameter.</li>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>Application Names: List of application names that you want to unblock on Fortinet FortiManager. Specify the application names in the list format, if you want to unblock more than one application. For example, for a list of applications, enter: <code>[&quot;Application_Name1&quot;, &quot;Application_Name2&quot;]</code> in this field. For a single application enter: <code>Application_Name</code></li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Names: List of application names that you want to unblock on Fortinet FortiManager. Specify the application names in the list format, if you want to unblock more than one application. For example, for a list of applications, enter: <code>["Application_Name1", "Application_Name2"]</code> in this field. For a single application enter: <code>Application_Name</code></li>
                 </ul>
                 If you select 'Global', then you can specify the following parameters:
                 <ul>
-                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blockUnblockIPAdd">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
-                    <li>Application Names: List of application names that you want to unblock on Fortinet FortiManager. Specify the application names in the list format, if you want to unblock more than one application. For example, for a list of applications, enter: <code>[&quot;Application_Name1&quot;, &quot;Application_Name2&quot;]</code> in this field. For a single application enter: <code>Application_Name</code></li>
+                    <li>Application Control Profile Name: Valid application control profile name that you have specified in Fortinet FortiManager for blocking or unblocking applications. Based on our example, enter <code>default</code> in this field. See the <a href="#blocking-or-unblocking-ip-addresses-urls-or-applications-in-fortinet-fortimanager">Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</a> section.</li>
+                    <li>Application Names: List of application names that you want to unblock on Fortinet FortiManager. Specify the application names in the list format, if you want to unblock more than one application. For example, for a list of applications, enter: <code>["Application_Name1", "Application_Name2"]</code> in this field. For a single application enter: <code>Application_Name</code></li>
                 </ul>
             </td>
         </tr>
@@ -6565,9 +6556,9 @@ The output contains the following populated JSON schema:
 ]
 ```
 
-<h2>Included playbooks</h2>
+## Included playbooks
 
-The *`Sample - Fortinet Fortimanager - 4.1.2`* playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** &gt; **Playbooks** section in FortiSOAR&trade; after importing the Fortinet FortiManager connector.
+The *`Sample - Fortinet Fortimanager - 4.1.3`* playbook collection comes bundled with the Fortinet FortiManager connector. These playbooks contain steps using which you can perform all supported actions. You can see bundled playbooks in the **Automation** &gt; **Playbooks** section in FortiSOAR after importing the Fortinet FortiManager connector.
 
 - ADOM Level Block IP Address
 - ADOM Level Get Blocked IP Addresses
@@ -6639,105 +6630,119 @@ The *`Sample - Fortinet Fortimanager - 4.1.2`* playbook collection comes bundled
 - Update Service Group
 - Update User Group
 
-____
-**Note**: If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection since the sample playbook collection gets deleted during the connector upgrade and delete.
-____
+>[!Note]
+>
+>If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection since the sample playbook collection gets deleted during the connector upgrade and delete.
+>
 
-<h2><a id="dataIngestion" name="dataIngestion"></a>Data Ingestion Support</h2>
+## Alert Ingestion Support
 
-<p>Use the Data Ingestion Wizard to easily ingest data into FortiSOAR&trade; by pulling incidents from Fortinet FortiManager. Currently, &quot;incidents&quot; in Fortinet FortiManager are mapped to &quot;alerts&quot; in FortiSOAR&trade;. For more information on the Data Ingestion Wizard, see the &quot;Connectors Guide&quot; in the FortiSOAR&trade; product documentation.</p>
+Use the **Data Ingestion Wizard** to easily ingest alerts into FortiSOAR by pulling detections from Fortinet FortiManager. Currently, *incidents* in Fortinet FortiManager are mapped to **Alerts** in FortiSOAR™. For more information on the **Data Ingestion Wizard**, see the *Connectors Guide* in the FortiSOAR product documentation.
 
-<h3>Configure Data Ingestion</h3>
+### Configure Alert Ingestion
 
-<p>You can configure data ingestion using the <strong>Data Ingestion Wizard</strong> to seamlessly map the incoming Fortinet FortiManager &quot;Incidents&quot;&nbsp;to FortiSOAR&trade; &quot;Alerts&quot;.</p>
+You can configure alert ingestion using the **Data Ingestion Wizard** to seamlessly map the incoming Fortinet FortiManager *detections* to FortiSOAR **Alerts**.
 
-<p>The Data Ingestion Wizard enables you to configure the scheduled pulling of data from Fortinet FortiManager into FortiSOAR&trade;. It also lets you pull some sample data from Fortinet FortiManager using which you can define the mapping of data between Fortinet FortiManager and FortiSOAR&trade;. The mapping of common fields is generally already done by the Data Ingestion Wizard; users are mostly required to only map any custom fields that are added to the Fortinet FortiManager incident.</p>
+The **Data Ingestion Wizard** enables you to configure the scheduled pulling of *detections* from Fortinet FortiManager into FortiSOAR. It also lets you pull some sample data from Fortinet FortiManager using which you can define the mapping of data between Fortinet FortiManager and FortiSOAR. The mapping of common fields is generally already done by the **Data Ingestion Wizard**; users mostly require to only map any custom fields that are added to the Fortinet FortiManager event.
 
-<ol>
-    <li>To begin configuring data ingestion, click <strong>Configure Data Ingestion</strong> on the Fortinet FortiManager connector&rsquo;s &quot;Configurations&quot; page.&nbsp;<br />
-        Click <strong>Let&rsquo;s Start by fetching some data</strong>, to open the <strong>Fetch Sample Data</strong> screen.<br />
-        <img src="./res/ingestion-00.png" /><br />
-        Sample data is required to create a field mapping between Fortinet FortiManager data and FortiSOAR&trade;. The sample data is pulled from connector actions or ingestion playbooks.
-    </li>
-    <li>On the <strong>Fetch Data</strong> screen, provide the configurations required to fetch Fortinet FortiManager data.<br />
-        Users can select to pull data from Fortinet FortiManager by specifying the last X minutes in which the incidents have been created or updated in Fortinet FortiManager and the administrative domain name (ADOM) of the Fortinet FortiManager server from which your want to fetch incidents. You can also specify a query to filter data retrieved from Fortinet FortiManager and can also specify additional parameters such as the category, severity, and status of the incidents to be fetched from Fortinet FortiManager. The fetched data is used to create a mapping between the Fortinet FortiManager data and FortiSOAR&trade; alerts.<br />
-        Once you have completed specifying the configurations, click <strong>Fetch Data</strong>.</li>
-    <li>
-        <p>On the <strong>Field Mapping</strong> screen, map the fields of a Fortinet FortiManager incident to the fields of an alert present in FortiSOAR&trade;.&nbsp;<br />
-            To map a field, click the key in the sample data to add the <strong>Jinja</strong> value of the field. For example, to map the <em>status</em>parameter of a Fortinet FortiManager incident to the <em>state</em> parameter of a FortiSOAR&trade; alert, click the <strong>State</strong> field and then click the <strong>status</strong> field to populate its keys: &nbsp;<br />
-            <img src="./res/ingestion-01.png" /><br />
-            For more information on field mapping, see the <em>Data Ingestion</em>chapter in the &quot;Connectors Guide&quot; in the FortiSOAR&trade; product documentation. Once you have completed mapping the fields, click <strong>Save Mapping &amp; Continue</strong>.
-        </p>
-    </li>
-    <li>
-        <p>Use the <strong>Scheduling</strong> screen to configure schedule-based ingestion, i.e., specify the polling frequency to Fortinet FortiManager, so that the content gets pulled from the Fortinet FortiManager integration into FortiSOAR&trade;.&nbsp;<br />
-            On the Scheduling screen, from the <strong>Do you want to schedule the ingestion?</strong> drop-down list, select <strong>Yes</strong>. &nbsp; &nbsp;<br />
-            In the <strong>Configure Schedule Settings</strong> section, specify the Cron expression for the schedule. For example, if you want to pull data from Fortinet FortiManager every 5 minutes, click <strong>Every X Minute,</strong> and in the minute box enter <code>*/5</code>. This would mean that based on the configuration you have set up, data, i.e., incidents will be pulled from Fortinet FortiManager every 5 minutes.<br />
-            <img src="./res/ingestion-02.png" /><br />
-            Once you have completed scheduling, click <strong>Save Settings&nbsp;&amp; Continue</strong>.
-        </p>
-    </li>
-    <li>
-        <p>The <strong>Summary</strong> screen displays a summary of the mapping done, and it also contains links to the Ingestion playbooks. Click <strong>Done</strong> to complete the data ingestion and exit the Data Ingestion Wizard.</p>
-    </li>
-</ol>
+1.  To begin configuring alert ingestion, click **Configure Data Ingestion** on the Fortinet FortiManager connector's *Configurations* page.
 
-<ul>
-</ul>
+    Click **Let's Start by fetching some data**, to open the *Fetch Sample Data* screen.
 
-<h2><a id="blockUnblockIPAdd" name="blockUnblockIPAdd"></a>Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager</h2>
+    ![](./res/ingestion-00.png)
 
-<ol>
-    <li>
-        <p>Log on to the Fortinet FortiManager server with the necessary credentials.</p>
-    </li>
-    <li>
-        <p>To block or unblock an IP address, you must create a policy for IP addresses on the Fortinet FortiManager server. The following steps define the process of adding a policy:</p>
-        <ol>
-            <li>In <code>Policy &amp; Objects &gt; Policy Packages</code>, click <strong>IPv4 Policy</strong> or <strong>Firewall Policy</strong> to create a policy for IPv4 with the following conditions.<br />
-                IPv4 Source Address = Blocked_IPs<br />
-                IPv4 Destination Address = Blocked_IPs<br />
-                Schedule = always<br />
-                Service = ALL<br />
-                Action = DENY<br />
-                <strong>Note</strong>: You can create an IPv6 policy in a similar manner.<br />
-                For more information on address group exclusions, see the <a href="https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/547958/create-a-new-object" rel="noopener noreferrer" target="_blank">Create a new object topic in the FortiManager 6.2.2 Administration Guide</a>.
-            </li>
-            <li>In <code>Policy &amp; Objects &gt; Object Configuration</code>, click <strong>Address Group</strong> to create an address group with the following conditions.<br />
-                Group Name = Blocked_IPs<br />
-                Member = none<br />
-                Show in address list = enable<br />
-                For more information on creating address groups and address group exclusions, see the <a href="https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/834430/ip-policies" rel="noopener noreferrer" target="_blank">IP policies topic in the FortiManager 6.2.2 Administration Guide</a>.</li>
-        </ol>
-    </li>
-    <li>To block or unblock a URL, you must create a profile for blocking or unblocking static URLs on the Fortinet FortiManager server. For information on creating web filters, see the 'Web Filter' topic at <a href="https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/795923/web-filter" target="_blank">https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/795923/web-filter</a>. The following steps define the process of adding a policy:
-        <ol>
-            <li>In <strong>Security Profiles</strong>, click <strong>Web Filter</strong> to create a new profile for blocking or unblocking static URLs or use the default profile.&nbsp;<br />
-                <strong>Note</strong>: Ensure that the &quot;URL Filter&quot; is enabled.&nbsp;
-            </li>
-            <li>Enter the Web Filter Profile name on the action page. For our example, we have named this 'URL Block Policy'.</li>
-        </ol>
-    </li>
-    <li>To block or unblock an application, you must create a profile for blocking or unblocking applications on the Fortinet FortiManager server. The following steps define the process of adding a policy:&nbsp;
-        <ol>
-            <li>In <strong>Security Profiles</strong>, click <strong>Application Control</strong> to create a new profile for blocking or unblocking applications or use the default profile.</li>
-            <li>Enter the policy name on the configuration page. For our example, we have named this?'App Block Policy'. When you are configuring your Fortinet FortiManager connector in FortiSOAR&trade;, you must use the Application Control Profile name that you have specified in this step as your 'Application Control Profile Name' action parameter.&nbsp;<br />
-                For information on adding application controls, see the 'Application Control' topic at <a href="https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/966512/application-control" target="_blank">https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/966512/application-control</a>.</li>
-        </ol>
-    </li>
-    <li>Users who are configuring Fortinet FortiManager for the first time have to perform the following steps for the 'Install' Policy:
-        <ol>
-            <li>Add devices to the <strong>Installation Targets</strong> where the user wants to install the IPv4/Firewall policy. &nbsp;&nbsp;</li>
-            <li>Navigate to the Device Manager select the Device that is specified in the installation target and click <strong>Install</strong>.</li>
-            <li>Click <strong>Install Policy Package &amp; Device Settings</strong>and select the policy package where the IPv4 Policy or Firewall Policy is created. &nbsp;</li>
-            <li>Run the 'Install Wizard' completely.</li>
-        </ol>
-    </li>
-    <li>Users who are configuring Fortinet FortiManager for the first time have to perform the following steps for the 'Assign Global Policy Package':
-        <ol>
-            <li>Add ADOM to the <strong>Assignment</strong> where the user wants to assign the Global Policy Package. For more information see the <a href="https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/53760/assign-a-global-policy-package" target="_blank">Assign a global policy package</a> section in the FortiManager document</li>
-            <li>Select the ADOM that you have specified in the assignment. &nbsp;</li>
-            <li>Run the 'Assign Wizard' completely.</li>
-        </ol>
-    </li>
-</ol>
+    Sample data is required to create a field mapping between Fortinet FortiManager data and FortiSOAR. The sample data is pulled from connector actions or ingestion playbooks.
+
+2.  On the **Fetch Data** screen, provide the configurations required to fetch Fortinet FortiManager data.
+
+    Users can pull data from Fortinet FortiManager by specifying the last X minutes based on which they want to pull detections from Fortinet FortiManager. You can filter detections retrieved from Fortinet FortiManager based on the detection's status, and the rule's severity or confidence, as well as sort the retrieved results based on a field. If you want to retrieve only those detections that are muted, select the Muted checkbox. Additionally, you can also specify the maximum number of detections to be pulled from Fortinet FortiManager; the default is set as 100 detection records.
+
+    ![](./res/ingestion-01.png)
+
+    The fetched data is used to create a mapping between the Fortinet FortiManager data and FortiSOAR Alerts. Once you have completed specifying the configurations, click **Fetch Data**.
+
+3. On the **Field Mapping** screen, map the fields of a Fortinet FortiManager incident to the fields of an alert present in FortiSOAR.
+
+    To map a field, click the key in the sample data to add the **Jinja** value of the field. For example, to map the *status* parameter of a Fortinet FortiManager incident to the *state* parameter of a FortiSOAR alert, click the **State** field and then click the **status** field to populate its keys:
+
+    ![](./res/ingestion-02.png)
+
+    For more information on field mapping, see the *Data Ingestion* chapter in *Connectors Guide* of the FortiSOAR product documentation. Once you have completed mapping the fields, click **Save Mapping & Continue**.
+
+4. Use the **Scheduling** screen to configure schedule-based ingestion, i.e., specify the polling frequency to Fortinet FortiManager, so that the content gets pulled from the Fortinet FortiManager integration into FortiSOAR.
+
+    On the Scheduling screen, from the **Do you want to schedule the ingestion?** drop-down list, select **Yes**.
+
+    In the **Configure Schedule Settings** section, specify the Cron expression for the schedule. For example, if you want to pull data from Fortinet FortiManager every 5 minutes, click **Every X Minute,** and in the minute box enter `*/5`. This would mean that based on the configuration you have set up, data, i.e., incidents will be pulled from Fortinet FortiManager every 5 minutes.
+
+    ![](./res/ingestion-03.png)
+
+    Once you have completed scheduling, click **Save Settings & Continue**.
+
+5. The **Summary** screen displays a summary of the mapping done, and it also contains links to the Ingestion playbooks. Click **Done** to complete the data ingestion and exit the Data Ingestion Wizard.
+
+    ![](./res/ingestion-04.png)
+
+## Blocking or Unblocking IP addresses, URLs, or applications in Fortinet FortiManager
+
+1.  Log on to the Fortinet FortiManager server with the necessary credentials.
+    
+2.  To block or unblock an IP address, you must create a policy for IP addresses on the Fortinet FortiManager server. The following steps define the process of adding a policy:
+    
+    1.  In *Policy & Objects* > *Policy Packages*, click **IPv4 Policy** or **Firewall Policy** to create a policy for IPv4 with the following conditions.
+
+        - IPv4 Source Address = `Blocked_IPs`
+
+        - IPv4 Destination Address = `Blocked_IPs`
+
+        - Schedule = `always`
+
+        - Service = `ALL`
+
+        - Action = `DENY`
+
+        Similarly, you can create a policy for IPV6 addresses.
+
+        For more information on address group exclusions, see the [Create a new object topic in the FortiManager 6.2.2 Administration Guide](https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/547958/create-a-new-object).
+
+    2.  In *Policy & Objects* > *Object Configuration*, click **Address Group** to create an address group with the following conditions:
+
+        - Group Name = `Blocked_IPs`
+
+        - Member = `none`
+
+        - Show in address list = `enable`
+
+        For more information on creating address groups and address group exclusions, see the [IP policies topic in the FortiManager 6.2.2 Administration Guide](https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/834430/ip-policies).
+
+3.  To block or unblock a URL, you must create a profile for blocking or unblocking static URLs on the Fortinet FortiManager server. For information on creating web filters, see the 'Web Filter' topic at [https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/795923/web-filter](https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/795923/web-filter). The following steps define the process of adding a policy:
+
+    1.  In **Security Profiles**, click **Web Filter** to create a new profile for blocking or unblocking static URLs or use the default profile. Ensure that the "URL Filter" is enabled.
+
+    2.  Enter the Web Filter Profile name on the action page. For our example, we have named this 'URL Block Policy'.
+
+4.  To block or unblock an application, you must create a profile for blocking or unblocking applications on the Fortinet FortiManager server. The following steps define the process of adding a policy:
+
+    1.  In **Security Profiles**, click **Application Control** to create a new profile for blocking or unblocking applications or use the default profile.
+
+    2.  Enter the policy name on the configuration page. For our example, we have named this?'App Block Policy'. When you are configuring your Fortinet FortiManager connector in FortiSOAR™, you must use the Application Control Profile name that you have specified in this step as your 'Application Control Profile Name' action parameter.
+
+        For information on adding application controls, see the 'Application Control' topic at [https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/966512/application-control](https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/966512/application-control).
+
+5.  Users who are configuring Fortinet FortiManager for the first time have to perform the following steps for the 'Install' Policy:
+
+    1.  Add devices to the **Installation Targets** where the user wants to install the IPv4/Firewall policy. 
+
+    2.  Navigate to the Device Manager select the Device that is specified in the installation target and click **Install**.
+
+    3.  Click **Install Policy Package & Device Settings**and select the policy package where the IPv4 Policy or Firewall Policy is created. 
+
+    4.  Run the 'Install Wizard' completely.
+
+6.  Users who are configuring Fortinet FortiManager for the first time have to perform the following steps for the 'Assign Global Policy Package':
+
+    1.  Add ADOM to the **Assignment** where the user wants to assign the Global Policy Package. For more information see the [Assign a global policy package](https://docs.fortinet.com/document/fortimanager/6.2.2/administration-guide/53760/assign-a-global-policy-package) section in the FortiManager document
+
+    2.  Select the ADOM that you have specified in the assignment. 
+
+    3.  Run the 'Assign Wizard' completely.
