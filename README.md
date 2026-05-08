@@ -10,7 +10,7 @@ You can use FortiSOAR's Data Ingestion Wizard to easily ingest data into FortiSO
 
 Connector Version: 4.1.3
 
-FortiSOAR Version Tested on: 7.6.4-5662
+FortiSOAR Version Tested on: 7.6.5-5662
 
 Fortinet FortiManager Version Tested on: FortiManager Cloud v7.6.5 build3653 (GA)
 
